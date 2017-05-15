@@ -1,0 +1,18 @@
+.heading {
+	text-align: center;
+}
+
+.heading h1 {
+	font-weight: bold;
+	font-size: 1.25em;
+	margin: 6px 0px;
+	padding: 2px 6px;
+	color: #000;
+}
+
+.heading h2 {
+	font-size: 1.1em;
+	margin: 2px 0px;
+	padding: 2px 0px;
+	color: #111;
+}

@@ -1,0 +1,23 @@
+.misc-item-input-form .button-group {
+	width: 300px;
+	margin: 18px auto 24px auto;
+}
+.misc-item-input-form .button-group:after {
+	display: table;
+	content: "";
+	clear: both;
+}
+
+.misc-item-input-form .button-group .button {
+	width: 100px;
+	display: block;
+	
+}
+
+.misc-item-input-form .button-group .back-button {
+	float: left;
+}
+
+.misc-item-input-form .button-group .next-button {
+	float: right;
+}
