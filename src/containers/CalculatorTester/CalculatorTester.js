@@ -3,10 +3,11 @@ import React from 'react';
 import HerbInputForm from '../InventoryInputForm/HerbInputForm';
 import MiscItemInputForm from '../InventoryInputForm/MiscItemInputForm';
 import PotionTotal from '../PotionTotal/PotionTotal';
+import RequirementTotal from '../RequirementTotal/RequirementTotal';
 
 const CalculatorTester = (props) => {
 	
-	const columnStyle = { float: "left", width: "33%" };
+	const columnStyle = { float: "left", width: "25%" };
 	
 	return (
 		<div>
@@ -18,6 +19,9 @@ const CalculatorTester = (props) => {
 			</div>
 			<div style={columnStyle}>
 				<PotionTotal />
+			</div>
+			<div style={columnStyle}>
+				<RequirementTotal />
 			</div>
 		</div>
 	);

@@ -102,24 +102,24 @@ const ITEMS = [
 		types: [ ITEM_TYPES.HERB ],
 		image: "cadantine.png"
 	},
-	{
-		id: MARRENTILL,
-		name: "Marrentill",
-		types: [ ITEM_TYPES.HERB ],
-		image: "marrentill.png"
-	},
-	{
-		id: TARROMIN,
-		name: "Tarromin",
-		types: [ ITEM_TYPES.HERB ],
-		image: "tarromin.png"
-	},
-	{
-		id: HARRALANDER,
-		name: "Harralander",
-		types: [ ITEM_TYPES.HERB ],
-		image: "harralander.png"
-	},
+	// {
+	// 	id: MARRENTILL,
+	// 	name: "Marrentill",
+	// 	types: [ ITEM_TYPES.HERB ],
+	// 	image: "marrentill.png"
+	// },
+	// {
+	// 	id: TARROMIN,
+	// 	name: "Tarromin",
+	// 	types: [ ITEM_TYPES.HERB ],
+	// 	image: "tarromin.png"
+	// },
+	// {
+	// 	id: HARRALANDER,
+	// 	name: "Harralander",
+	// 	types: [ ITEM_TYPES.HERB ],
+	// 	image: "harralander.png"
+	// },
 	{
 		id: RANARR,
 		name: "Ranarr",
@@ -138,12 +138,12 @@ const ITEMS = [
 		types: [ ITEM_TYPES.HERB ],
 		image: "spirit_weed.png"
 	},
-	{
-		id: WERGALI,
-		name: "Wergali",
-		types: [ ITEM_TYPES.HERB ],
-		image: "wergali.png"
-	},
+	// {
+	// 	id: WERGALI,
+	// 	name: "Wergali",
+	// 	types: [ ITEM_TYPES.HERB ],
+	// 	image: "wergali.png"
+	// },
 	{
 		id: SNAPDRAGON,
 		name: "Snapdragon",
@@ -326,18 +326,18 @@ const ITEMS = [
 		types: [ ITEM_TYPES.SECONDARY ],
 		image: "morchella_mushroom.png"
 	},
-	{
-		id: DRAGON_SCALE_DUST,
-		name: "Dragon Scale Dust",
-		types: [ ITEM_TYPES.SECONDARY ],
-		image: "dragon_scale_dust.png"
-	},
-	{
-		id: PHOENIX_FEATHER,
-		name: "Phoenix Feater",
-		types: [ ITEM_TYPES.SECONDARY ],
-		image: "phoenix_feather.png"
-	}
+	// {
+	// 	id: DRAGON_SCALE_DUST,
+	// 	name: "Dragon Scale Dust",
+	// 	types: [ ITEM_TYPES.SECONDARY ],
+	// 	image: "dragon_scale_dust.png"
+	// },
+	// {
+	// 	id: PHOENIX_FEATHER,
+	// 	name: "Phoenix Feater",
+	// 	types: [ ITEM_TYPES.SECONDARY ],
+	// 	image: "phoenix_feather.png"
+	// }
 	
 ];
 
