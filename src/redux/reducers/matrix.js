@@ -57,12 +57,10 @@ const matrixInitialState = {
 }
 
 /**
-	Calculates what potions will be produced to consume all torstol in the form of Overloads
-	Once all overloads are taken care of, extra herbs are used to create potions in an attempt to have a balanced number of extremes for the future
-	Finally, any additional herbs are put into other potions such as prayer renewal, summoning, etc.
+	Calculates how many extremes and super potions must be output to consume all torstol in the inventory
 	
 */
-const getOutput = (inventory) => {
+const getOverloadOutput = (inventory) => {
 	
 	// helper function to lookup inventory quantity
 	const getInventoryQuantity = (itemID) => inventory[itemID] || 0;
@@ -88,99 +86,113 @@ const getOutput = (inventory) => {
 	const numSuperMagicForExtremeMagic = Math.max(0, numExtremeMagicForOverload - getInventoryQuantity(SUPER_MAGIC));
 	const numSuperRangingForExtremeRanging = Math.max(0, numExtremeRangingForOverload - getInventoryQuantity(SUPER_RANGING_POTION));
 
-	// determine what to use dwarf weed for, it is used for both extreme strength and super ranging potion
-	//	the end result is that we want an equal number of extreme strength and extreme ranging potions
-	//	output enough potions to balance the two and then evenly split any remaining dwarf weed between the two
-	const numDwarfWeedAfterOverloads = Math.max(0, getInventoryQuantity(DWARF_WEED) - numExtremeStrengthForOverload - numSuperRangingForExtremeRanging);
-	const numExtremeStrength = getInventoryQuantity(EXTREME_STRENGTH);
-	const numExtremeRanging = getInventoryQuantity(EXTREME_RANGING);
-	const numSuperRanging = getInventoryQuantity(SUPER_RANGING_POTION);
-	const numSuperRangingToBalanceWithExtremeStrength = Math.max(0, numExtremeStrength - numExtremeRanging - numSuperRanging);
-	const numExtremeStrengthToBalanceWithExtremeRanging = Math.max(0, numExtremeRanging + numSuperRanging - numExtremeStrength);
-	const numDwarfWeedForExtras = Math.max(0, numDwarfWeedAfterOverloads - numSuperRangingToBalanceWithExtremeStrength - numExtremeStrengthToBalanceWithExtremeRanging);
-	const numSuperRangingForExtras = Math.floor(numDwarfWeedForExtras / 2);
-	const numExtremeStrengthForExtras = Math.ceil(numDwarfWeedForExtras / 2);
-	
-	// determine what to use lantadyme for, it is used for both extreme defence and super magic
-	//	the end result is that we want an equal number of extreme defence and extreme magic
-	//	output enough potions to balance the two and then evenly split any remaining lantadyme between the two
-	const numLantadymeAfterOverloads = Math.max(0, getInventoryQuantity(LANTADYME) - numExtremeDefenceForOverload - numSuperMagicForExtremeMagic);
-	const numExtremeDefence = getInventoryQuantity(EXTREME_DEFENCE);
-	const numExtremeMagic = getInventoryQuantity(EXTREME_MAGIC);
-	const numSuperMagic = getInventoryQuantity(SUPER_MAGIC);
-	const numSuperMagicToBalanceWithExtremeDefence = Math.max(0, numExtremeDefence - numExtremeMagic - numSuperMagic);
-	const numExtremeDefenceToBalanceWithExtremeMagic = Math.max(0, numExtremeMagic + numSuperMagic - numExtremeDefence);
-	const numLantadymeForExtras = Math.max(0, numLantadymeAfterOverloads - numSuperMagicToBalanceWithExtremeDefence - numExtremeDefenceToBalanceWithExtremeMagic);
-	const numSuperMagicForExtras = Math.floor(numLantadymeForExtras / 2);
-	const numExtremeDefenceForExtras = Math.ceil(numLantadymeForExtras / 2);
-
-	// create additional extreme attack potions to use up all avantoe
-	const numExtremeAttackForExtras = Math.max(0, getInventoryQuantity(AVANTOE) - numExtremeAttackForOverload);
-
-	// upgrade all super magic potions into extreme potions
-	const numExtremeMagicForExtras = Math.max(0, getInventoryQuantity(SUPER_MAGIC) - numSuperMagicForExtremeMagic);
-
-	// upgrade all super ranging potions into extreme ranging potions
-	const numExtremeRangingForExtras = Math.max(0, getInventoryQuantity(SUPER_RANGING_POTION) - numExtremeRangingForOverload);
-
-	// determine how many additional supers to create to accomodate the "extra" extremes being made
-	const numSuperAttackToUpgradeToExtreme = Math.max(0, numExtremeAttackForExtras - getInventoryQuantity(SUPER_ATTACK));
-	const numSuperStrengthToUpgradeToExtreme = Math.max(0, numExtremeStrengthForExtras - getInventoryQuantity(SUPER_STRENGTH));
-	const numSuperDefenceToUpgradeToExtreme = Math.max(0, numExtremeDefenceForExtras - getInventoryQuantity(SUPER_DEFENCE));
-	const numSuperMagicToUpgradeToExtreme = Math.max(0, numExtremeMagicForExtras - getInventoryQuantity(SUPER_MAGIC));
-	const numSuperRangingToUpgradeToExtreme = Math.max(0, numExtremeRangingForExtras - getInventoryQuantity(SUPER_RANGING_POTION));
-
-	// use up any remaining irit for super attack potions
-	const numSuperAttackPotionsForExtras = Math.max(0, getInventoryQuantity(IRIT) - numSuperAttackForExtremeAttack);
-
-	// use up any remaining kwuarm for super strength
-	const numSuperStrengthForExtras = Math.max(0, getInventoryQuantity(KWUARM) - numSuperStrengthForExtremeStrength);
-	
-	// use up any remaining cadantine for super defence
-	const numSuperDefenceForExtras = Math.max(0, getInventoryQuantity(CADANTINE) - numSuperDefenceForExtremeDefence);
-	
-	// use all rannar to make prayer potion
-	const numPrayerPotion = getInventoryQuantity(RANARR);
-	
-	// use all toadflax to make saradomin brew
-	const numSaradominBrew = getInventoryQuantity(TOADFLAX);
-	
-	// use all spirit weed to make summoning potion
-	const numSummoningPotion = getInventoryQuantity(SPIRIT_WEED);
-	
-	// use all snapdragon to make super restores
-	const numSuperRestore = getInventoryQuantity(SNAPDRAGON);
-	
-	// use all fellstalk to make prayer renewal
-	const numPrayerRenewal = getInventoryQuantity(FELLSTALK);
-
-	console.log(numExtremeStrengthForOverload, numExtremeStrengthToBalanceWithExtremeRanging, numExtremeStrengthForExtras);
-
 	// object containing the calculated output
 	const output = {
 		
 		[OVERLOAD]: numOverload,
 		
-		[EXTREME_ATTACK]: numExtremeAttackForOverload + numExtremeAttackForExtras,
-		[EXTREME_STRENGTH]: numExtremeStrengthForOverload + numExtremeStrengthToBalanceWithExtremeRanging + numExtremeStrengthForExtras,
-		[EXTREME_DEFENCE]: numExtremeDefenceForOverload + numExtremeDefenceToBalanceWithExtremeMagic + numExtremeDefenceForExtras,
-		[EXTREME_MAGIC]: numExtremeMagicForOverload + numExtremeMagicForExtras + numSuperMagicToBalanceWithExtremeDefence + numSuperMagicForExtras,
-		[EXTREME_RANGING]: numExtremeRangingForOverload + numExtremeRangingForExtras + numSuperRangingToBalanceWithExtremeStrength + numSuperRangingForExtras,
+		[EXTREME_ATTACK]: numExtremeAttackForOverload,
+		[EXTREME_STRENGTH]: numExtremeStrengthForOverload,
+		[EXTREME_DEFENCE]: numExtremeDefenceForOverload,
+		[EXTREME_MAGIC]: numExtremeMagicForOverload,
+		[EXTREME_RANGING]: numExtremeRangingForOverload,
 		
-		[SUPER_ATTACK]: numSuperAttackForExtremeAttack + numSuperAttackToUpgradeToExtreme + numSuperAttackPotionsForExtras,
-		[SUPER_STRENGTH]: numSuperStrengthForExtremeStrength + numSuperStrengthToUpgradeToExtreme + numSuperStrengthForExtras,
-		[SUPER_DEFENCE]: numSuperDefenceForExtremeDefence + numSuperDefenceToUpgradeToExtreme + numSuperDefenceForExtras,
-		[SUPER_MAGIC]: numSuperMagicForExtremeMagic + numSuperMagicToBalanceWithExtremeDefence + numSuperMagicToUpgradeToExtreme + numSuperMagicForExtras,
-		[SUPER_RANGING_POTION]: numSuperRangingForExtremeRanging + numSuperRangingToBalanceWithExtremeStrength + numSuperRangingToUpgradeToExtreme + numSuperRangingForExtras,
-		
-		[PRAYER_POTION]: numPrayerPotion,
-		[SARADOMIN_BREW]: numSaradominBrew,
-		[SUMMONING_POTION]: numSummoningPotion,
-		[SUPER_RESTORE]: numSuperRestore,
-		[PRAYER_RENEWAL]: numPrayerRenewal,
+		[SUPER_ATTACK]: numSuperAttackForExtremeAttack,
+		[SUPER_STRENGTH]: numSuperStrengthForExtremeStrength,
+		[SUPER_DEFENCE]: numSuperDefenceForExtremeDefence,
+		[SUPER_MAGIC]: numSuperMagicForExtremeMagic,
+		[SUPER_RANGING_POTION]: numSuperRangingForExtremeRanging,
 				
 	}
 	
+	return output;
+	
+}
+
+/**
+*/
+const getOutput = (inventory) => {
+
+	// helper function to lookup inventory quantity
+	const getInventoryQuantity = (itemID) => inventory[itemID] || 0;
+
+	// calculate potion output to consume all torstol and create overloads
+	const overloadOutput = getOverloadOutput(inventory);
+
+	// examine the herbs used in overload creation and determine how many are remaining in the inventory
+	const numAvantoeAfterOverloads = Math.max(0, getInventoryQuantity(AVANTOE) - overloadOutput[EXTREME_ATTACK]);
+	const numDwarfWeedAfterOverloads = Math.max(0, getInventoryQuantity(DWARF_WEED) - overloadOutput[EXTREME_STRENGTH] - overloadOutput[SUPER_RANGING_POTION]);
+	const numLantadymeAfterOverloads = Math.max(0, getInventoryQuantity(LANTADYME) - overloadOutput[EXTREME_DEFENCE] - overloadOutput[SUPER_MAGIC]);
+	const numIritAfterOverloads = Math.max(0, getInventoryQuantity(IRIT) - overloadOutput[SUPER_ATTACK]);
+	const numKwuarmAfterOverloads = Math.max(0, getInventoryQuantity(KWUARM) - overloadOutput[SUPER_STRENGTH]);
+	const numCadantineAfterOverloads = Math.max(0, getInventoryQuantity(CADANTINE) - overloadOutput[SUPER_DEFENCE]);
+
+	// determine how many extremes are remaining after the creation of overloads
+	const numExtremeStrengthAfterOverloads = Math.max(0, getInventoryQuantity(EXTREME_STRENGTH) - overloadOutput[OVERLOAD]);
+	const numExtremeDefenceAfterOverloads = Math.max(0, getInventoryQuantity(EXTREME_DEFENCE) - overloadOutput[OVERLOAD]);
+	const numExtremeMagicAfterOverloads = Math.max(0, getInventoryQuantity(EXTREME_MAGIC) - overloadOutput[OVERLOAD]);
+	const numExtremeRangingAfterOverloads = Math.max(0, getInventoryQuantity(EXTREME_RANGING) - overloadOutput[OVERLOAD]);
+
+	// determine how many supers are remaining after the creation of overloads
+	const numSuperAttackAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_ATTACK) - overloadOutput[EXTREME_ATTACK]);
+	const numSuperStrengthAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_STRENGTH) - overloadOutput[EXTREME_STRENGTH]);
+	const numSuperDefenceAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_DEFENCE) - overloadOutput[EXTREME_DEFENCE]);
+	const numSuperMagicAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_MAGIC) - overloadOutput[EXTREME_STRENGTH]);
+	const numSuperRangingAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_RANGING_POTION) - overloadOutput[EXTREME_RANGING]);
+
+	// turn all remaining irit into super attack
+	const numSuperAttackFromRemainingIrit = numIritAfterOverloads;
+
+	// turn all remaining avantoe into extreme attack
+	const numExtremeAttackFromRemainingAvantoe = numAvantoeAfterOverloads;
+
+	// turn all remaining kwuarm into super strength
+	const numSuperStrengthFromRemainingKwuarm = numKwuarmAfterOverloads;
+
+	// turn all remaining cadantime into super defence
+	const numSuperDefenceFromRemainingCadantime = numCadantineAfterOverloads;
+
+	// decide what to use remaining dwarf weed for
+	//	it is used for both extreme strength and super ranging
+	//	the end goal is to have an equal quantity of extreme strength and extreme ranging
+	const numDwarfWeedToBalanceExtremeStrengthWithExtremeRanging = Math.max(0, numExtremeRangingAfterOverloads - numExtremeStrengthAfterOverloads);
+	const numDwarfWeedToBalanceRangingWithExtremeStrength = Math.max(0, numExtremeStrengthAfterOverloads - numExtremeRangingAfterOverloads - numSuperRangingAfterOverloads);
+	const numDwarfWeedAfterBalancing = Math.max(0, numDwarfWeedAfterOverloads - numDwarfWeedToBalanceExtremeStrengthWithExtremeRanging - numDwarfWeedToBalanceRangingWithExtremeStrength);
+	const numExtremeStrengthFromRemainingDwarfWeed = Math.min(numDwarfWeedAfterOverloads, numDwarfWeedToBalanceExtremeStrengthWithExtremeRanging) + Math.floor(numDwarfWeedAfterBalancing / 2);
+	const numSuperRangingFromRemainingDwarfWeed = Math.min(numDwarfWeedAfterOverloads, numDwarfWeedToBalanceRangingWithExtremeStrength) + Math.ceil(numDwarfWeedAfterBalancing / 2);
+
+	// decide what to use remaining lantadyme for
+	//	it is used for both extreme defence and super magic
+	//	the end goal is to have an equal quantity of extreme defence and extreme magic
+	const numLantadymeToBalanceExtremeDefenceWithExtremeMagic = Math.max(0, numExtremeMagicAfterOverloads + numSuperMagicAfterOverloads - numExtremeDefenceAfterOverloads);
+	const numLantadymeToBalanceMagicWithExtremeDefence = Math.max(0, numExtremeDefenceAfterOverloads - numExtremeMagicAfterOverloads - numSuperMagicAfterOverloads);
+	const numLantadymeAfterBalancing = Math.max(0, numLantadymeAfterOverloads - numLantadymeToBalanceExtremeDefenceWithExtremeMagic - numLantadymeToBalanceMagicWithExtremeDefence);
+	const numExtremeDefenceFromRemainingLantadyme = Math.min(numLantadymeAfterBalancing, numLantadymeToBalanceExtremeDefenceWithExtremeMagic) + Math.floor(numLantadymeAfterBalancing / 2);
+	const numSuperMagicFromRemainingDwarfWeed = Math.min(numLantadymeAfterBalancing, numLantadymeToBalanceMagicWithExtremeDefence) + Math.ceil(numLantadymeAfterBalancing / 2);
+
+	const output = {
+		
+		[OVERLOAD]: overloadOutput[OVERLOAD],
+		
+		[EXTREME_ATTACK]: overloadOutput[EXTREME_ATTACK] + numExtremeAttackFromRemainingAvantoe,
+		[EXTREME_STRENGTH]: overloadOutput[EXTREME_STRENGTH] + numExtremeStrengthFromRemainingDwarfWeed,
+		[EXTREME_DEFENCE]: overloadOutput[EXTREME_DEFENCE] + numExtremeDefenceFromRemainingLantadyme,
+		[EXTREME_MAGIC]: overloadOutput[EXTREME_MAGIC] + numSuperMagicFromRemainingDwarfWeed,	// upgrade any extra super magic made into extreme magic
+		[EXTREME_RANGING]: overloadOutput[EXTREME_RANGING] + numSuperRangingFromRemainingDwarfWeed,	// upgrade any extra super ranging made into extreme ranging
+		
+		[SUPER_ATTACK]: overloadOutput[SUPER_ATTACK] + numSuperAttackFromRemainingIrit,
+		[SUPER_STRENGTH]: overloadOutput[SUPER_STRENGTH] + numSuperStrengthFromRemainingKwuarm,
+		[SUPER_DEFENCE]: overloadOutput[SUPER_DEFENCE] + numSuperDefenceFromRemainingCadantime,
+		[SUPER_MAGIC]: overloadOutput[SUPER_MAGIC] + numSuperMagicFromRemainingDwarfWeed,
+		[SUPER_RANGING_POTION]: overloadOutput[SUPER_RANGING_POTION] + numSuperRangingFromRemainingDwarfWeed,
+
+		[PRAYER_POTION]: getInventoryQuantity(RANARR),
+		[SARADOMIN_BREW]: getInventoryQuantity(TOADFLAX),
+		[SUMMONING_POTION]: getInventoryQuantity(SPIRIT_WEED),
+		[PRAYER_RENEWAL]: getInventoryQuantity(FELLSTALK),
+				
+	}
+
 	// filter out any less than or equal to zero quantities
 	let filteredOutput = {};
 	for (let key in output) {
@@ -190,7 +202,7 @@ const getOutput = (inventory) => {
 	}
 	
 	return filteredOutput;
-	
+
 }
 
 /**
