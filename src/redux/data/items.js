@@ -298,7 +298,7 @@ const ITEMS = [
 	},
 	{
 		id: SUMMONING_EGG,
-		name: "Cockatrice Egg*",
+		name: "Cockatrice Egg",
 		types: [ ITEM_TYPES.SECONDARY ],
 		image: "cockatrice_egg.png"
 	},

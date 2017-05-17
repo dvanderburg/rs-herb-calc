@@ -4,17 +4,14 @@ import _ from 'underscore';
 
 import ITEMS from '../../redux/data/items';
 
-import Heading from '../../components/Heading/Heading';
 import ItemQuantity from '../../components/ItemQuantity/ItemQuantity';
-
-import './PotionTotal.css';
 
 /**
 */
 const mapStateToProps = (state) => {
 	
 	return {
-		output: state.matrix.output
+		output: state.calculator.output
 	}
 	
 }
@@ -39,8 +36,7 @@ const PotionTotal = (props) => {
 	});
 	
 	return (
-		<div className="potion-total">
-			<Heading text="Potion Output" />
+		<div className="potion-total-component">
 			{itemQuantities}
 		</div>
 	);

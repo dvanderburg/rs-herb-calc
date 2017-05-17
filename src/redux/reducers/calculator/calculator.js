@@ -1,24 +1,19 @@
-import { INVENTORY_ITEM_QUANTITY_CHANGE } from '../actions/types';
+import { INVENTORY_ITEM_QUANTITY_CHANGE } from '../../actions/types';
 
 import {
 	AVANTOE,
 	CADANTINE,
 	DWARF_WEED,
 	FELLSTALK,
-	// HARRALANDER,
 	IRIT,
 	KWUARM,
 	LANTADYME,
-	// MARRENTILL,
 	RANARR,
 	SNAPDRAGON,
 	SPIRIT_WEED,
-	// TARROMIN,
 	TOADFLAX,
 	TORSTOL,
-	// WERGALI,
 	CRUSHED_NEST,
-	// DRAGON_SCALE_DUST,
 	EYE_OF_NEWT,
 	EXTREME_ATTACK,
 	EXTREME_STRENGTH,
@@ -29,7 +24,6 @@ import {
 	GROUND_MUD_RUNES,
 	LIMPWURT_ROOT,
 	MORCHELLA_MUSHROOM,
-	// PHOENIX_FEATHER,
 	OVERLOAD,
 	POTATO_CACTUS,
 	PRAYER_POTION,
@@ -47,19 +41,15 @@ import {
 	SUPER_RESTORE,
 	WHITE_BERRIES,
 	WINE_OF_ZAMORAK
-} from '../data/items';
+} from '../../data/items';
 
-// initial state of the potions matrix
-const matrixInitialState = {
-	inventory: {},	// items owned by the user
-	output: {},	// output of potions created by the user
-	requirements: {}	// items required by the user
+// initial state of the calculator
+const calculatorInitialState = {
+	inventory: {},	// items entered into the calculator
+	output: {},	// output of potions created based in inventory input
+	requirements: {}	// items required for the potion output that are not in the inventory
 }
 
-/**
-	Calculates how many extremes and super potions must be output to consume all torstol in the inventory
-	
-*/
 const getOverloadOutput = (inventory) => {
 	
 	// helper function to lookup inventory quantity
@@ -198,6 +188,7 @@ const getOutput = (inventory) => {
 		[PRAYER_POTION]: getInventoryQuantity(RANARR),
 		[SARADOMIN_BREW]: getInventoryQuantity(TOADFLAX),
 		[SUMMONING_POTION]: getInventoryQuantity(SPIRIT_WEED),
+		[SUPER_RESTORE]: getInventoryQuantity(SNAPDRAGON),
 		[PRAYER_RENEWAL]: getInventoryQuantity(FELLSTALK),
 				
 	}
@@ -294,11 +285,11 @@ const getRequirements = (inventory, output) => {
 
 /**
 */
-const inventoryItemQuantityChange = (matrix, item, quantity) => {
+const inventoryItemQuantityChange = (calculator, item, quantity) => {
 	
 	// new state of inventory, update the quantity of the item that was changed
 	const inventory = {
-		...matrix.inventory,
+		...calculator.inventory,
 		[item.id]: quantity
 	}
 	
@@ -309,7 +300,7 @@ const inventoryItemQuantityChange = (matrix, item, quantity) => {
 	const requirements = getRequirements(inventory, output);
 	
 	return {
-		...matrix,
+		...calculator,
 		inventory: inventory,
 		output: output,
 		requirements: requirements
@@ -319,15 +310,15 @@ const inventoryItemQuantityChange = (matrix, item, quantity) => {
 
 /**
 */
-const matrixReducer = (matrix=matrixInitialState, action) => {
+const calculatorReducer = (calculator=calculatorInitialState, action) => {
 	
 	switch (action.type) {
 		case INVENTORY_ITEM_QUANTITY_CHANGE:
-			return inventoryItemQuantityChange(matrix, action.item, action.quantity);
+			return inventoryItemQuantityChange(calculator, action.item, action.quantity);
 		default:
-			return matrix;
+			return calculator;
 	}
 
 }
 
-export default matrixReducer;
+export default calculatorReducer;

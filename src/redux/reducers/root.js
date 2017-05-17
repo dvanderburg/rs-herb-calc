@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import matrixReducer from './matrix';
+import calculator from './calculator/calculator';
 
 export default combineReducers({
-	matrix: matrixReducer
+	calculator
 });

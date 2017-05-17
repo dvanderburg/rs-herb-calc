@@ -4,15 +4,12 @@ import _ from 'underscore';
 
 import ITEMS from '../../redux/data/items';
 
-import Heading from '../../components/Heading/Heading';
 import ItemQuantity from '../../components/ItemQuantity/ItemQuantity';
-
-import './RequirementTotal.css';
 
 const mapStateToProps = (state) => {
 
 	return {
-		requirements: state.matrix.requirements
+		requirements: state.calculator.requirements
 	}
 
 }
@@ -31,7 +28,6 @@ const RequirementTotal = (props) => {
 
 	return (
 		<div className="requirement-total">
-			<Heading text="Items Needed" />
 			{itemQuantities}
 		</div>
 	);

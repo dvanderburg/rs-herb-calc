@@ -1,0 +1,10 @@
+.calculator .column {
+	float: left;
+	width: 25%;
+}
+
+
+/* BREAK POINT - Wide screen that can accomodate all four columns */
+@media only screen and (min-width: 1000px) {
+	
+}

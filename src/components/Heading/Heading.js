@@ -1,18 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Heading.css';
 
-/**
-	Generic component to display a page "heading"
+class Heading extends React.Component {
 	
-*/
-export default (props) => {
-	
-	return (
-		<div className="heading">
-			<h1>{props.text}</h1>
-			<h2>{props.subheading}</h2>
-		</div>
-	);
-	
+	/**
+	 * @return {JSX}
+	 */
+	render() {
+		
+		return (
+			<div className="heading">
+				<h1>{this.props.text}</h1>
+				<h2>{this.props.subheading}</h2>
+			</div>		
+		)
+		
+	}
+
 }
+
+Heading.propTypes = {
+	text: PropTypes.string
+}
+
+export default Heading;
