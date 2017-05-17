@@ -140,18 +140,6 @@ const getOutput = (inventory) => {
 	const numSuperMagicAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_MAGIC) - overloadOutput[EXTREME_STRENGTH]);
 	const numSuperRangingAfterOverloads = Math.max(0, getInventoryQuantity(SUPER_RANGING_POTION) - overloadOutput[EXTREME_RANGING]);
 
-	// turn all remaining irit into super attack
-	const numSuperAttackFromRemainingIrit = numIritAfterOverloads;
-
-	// turn all remaining avantoe into extreme attack
-	const numExtremeAttackFromRemainingAvantoe = numAvantoeAfterOverloads;
-
-	// turn all remaining kwuarm into super strength
-	const numSuperStrengthFromRemainingKwuarm = numKwuarmAfterOverloads;
-
-	// turn all remaining cadantime into super defence
-	const numSuperDefenceFromRemainingCadantime = numCadantineAfterOverloads;
-
 	// decide what to use remaining dwarf weed for
 	//	it is used for both extreme strength and super ranging
 	//	the end goal is to have an equal quantity of extreme strength and extreme ranging
@@ -170,6 +158,27 @@ const getOutput = (inventory) => {
 	const numExtremeDefenceFromRemainingLantadyme = Math.min(numLantadymeAfterBalancing, numLantadymeToBalanceExtremeDefenceWithExtremeMagic) + Math.floor(numLantadymeAfterBalancing / 2);
 	const numSuperMagicFromRemainingDwarfWeed = Math.min(numLantadymeAfterBalancing, numLantadymeToBalanceMagicWithExtremeDefence) + Math.ceil(numLantadymeAfterBalancing / 2);
 
+	// turn all remaining irit into super attack
+	const numSuperAttackFromRemainingIrit = numIritAfterOverloads;
+
+	// turn all remaining avantoe into extreme attack
+	const numExtremeAttackFromRemainingAvantoe = numAvantoeAfterOverloads;
+
+	// if there are not enough super attack to cover the additional extreme attack, add more super attack to the ouput
+	const numAdditionalSuperAttackForExtremeAttack = Math.max(0, numExtremeAttackFromRemainingAvantoe - numSuperAttackAfterOverloads - numSuperAttackFromRemainingIrit);
+
+	// turn all remaining kwuarm into super strength
+	const numSuperStrengthFromRemainingKwuarm = numKwuarmAfterOverloads;
+
+	// if there are not enough super strength to cover the additional extreme strength, add more super strength to the output
+	const numAdditionalSuperStrengthForExtremeStrength = Math.max(0, numExtremeStrengthFromRemainingDwarfWeed - numSuperStrengthAfterOverloads - numSuperStrengthFromRemainingKwuarm);
+
+	// turn all remaining cadantime into super defence
+	const numSuperDefenceFromRemainingCadantime = numCadantineAfterOverloads;
+
+	// if there are not enough super defence to cover the additional extreme defence, add more super defence to the ouput
+	const numAdditionalSuperDefenceForExtremeDefence = Math.max(0, numExtremeDefenceFromRemainingLantadyme - numSuperDefenceAfterOverloads - numSuperDefenceFromRemainingCadantime);
+
 	const output = {
 		
 		[OVERLOAD]: overloadOutput[OVERLOAD],
@@ -180,9 +189,9 @@ const getOutput = (inventory) => {
 		[EXTREME_MAGIC]: overloadOutput[EXTREME_MAGIC] + numSuperMagicFromRemainingDwarfWeed,	// upgrade any extra super magic made into extreme magic
 		[EXTREME_RANGING]: overloadOutput[EXTREME_RANGING] + numSuperRangingFromRemainingDwarfWeed,	// upgrade any extra super ranging made into extreme ranging
 		
-		[SUPER_ATTACK]: overloadOutput[SUPER_ATTACK] + numSuperAttackFromRemainingIrit,
-		[SUPER_STRENGTH]: overloadOutput[SUPER_STRENGTH] + numSuperStrengthFromRemainingKwuarm,
-		[SUPER_DEFENCE]: overloadOutput[SUPER_DEFENCE] + numSuperDefenceFromRemainingCadantime,
+		[SUPER_ATTACK]: overloadOutput[SUPER_ATTACK] + numSuperAttackFromRemainingIrit + numAdditionalSuperAttackForExtremeAttack,
+		[SUPER_STRENGTH]: overloadOutput[SUPER_STRENGTH] + numSuperStrengthFromRemainingKwuarm + numAdditionalSuperStrengthForExtremeStrength,
+		[SUPER_DEFENCE]: overloadOutput[SUPER_DEFENCE] + numSuperDefenceFromRemainingCadantime + numAdditionalSuperDefenceForExtremeDefence,
 		[SUPER_MAGIC]: overloadOutput[SUPER_MAGIC] + numSuperMagicFromRemainingDwarfWeed,
 		[SUPER_RANGING_POTION]: overloadOutput[SUPER_RANGING_POTION] + numSuperRangingFromRemainingDwarfWeed,
 
