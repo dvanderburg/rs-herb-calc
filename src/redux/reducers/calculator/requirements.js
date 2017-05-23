@@ -48,7 +48,7 @@ import {
  * @param  {object} output    The desired potion output, keyed with item id, value of quantity 
  * @return {object}           The items required to generate the desired output, keyed with item id, value of quantity
  */
-const getRequirements = (inventory, output) => {
+export const getRequirements = (inventory, output) => {
 	
 	// helper functions to lookup inventory and output quantity, using default of zero if known are owned/output
 	const getInventoryQuantity = (itemID) => inventory[itemID] || 0;
@@ -123,5 +123,3 @@ const getRequirements = (inventory, output) => {
 	return filteredRequirements;
 	
 }
-
-export default getRequirements;
