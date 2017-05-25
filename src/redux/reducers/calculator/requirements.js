@@ -52,7 +52,7 @@ export const getRequirements = (inventory, output) => {
 	
 	// helper functions to lookup inventory and output quantity, using default of zero if known are owned/output
 	const getInventoryQuantity = (itemID) => inventory[itemID] || 0;
-	const getOutputQuantity = (itemID) => output[itemID] || 0;
+	const getOutputQuantity = (itemID) => output[itemID] ? output[itemID].quantity : 0;
 
 	const requiredTorstol = Math.max(0, getOutputQuantity(OVERLOAD) - getInventoryQuantity(TORSTOL));
 

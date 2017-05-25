@@ -22,17 +22,12 @@ const mapStateToProps = (state) => {
 */
 const PotionTotal = (props) => {
 	
-	// create an array if ItemRequirement components by itterating over the output
-	//	output is an object where key is an item ID and value is a quantity
-	//	convert the object to key value pairs to create an <ItemQuantity /> for each requirement
-	const itemQuantities = _.pairs(props.output).map(output => {
+	// create an ItemQuantity component for each item being output
+	const itemQuantities = _.map(props.output, (output, itemID) => {
 		
-		const itemID = output[0];
-		const itemQuantity = output[1];
 		const item = ITEMS.find(item => item.id === itemID);
+		return <ItemQuantity key={itemID} item={item} quantity={output.quantity} />;
 		
-		return <ItemQuantity key={itemID} item={item} quantity={itemQuantity} />
-
 	});
 	
 	return (
