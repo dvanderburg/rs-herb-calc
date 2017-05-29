@@ -12,6 +12,8 @@ import RequirementTotal from '../RequirementTotal/RequirementTotal';
 import './Calculator.css';
 
 /**
+ * Displays the potion calculator where a user can input the quantity of herbs and secondaries they own
+ * Displays the result of the calculator along with the inventory inputs
  * 
  */
 class Calculator extends React.Component {
@@ -26,21 +28,26 @@ class Calculator extends React.Component {
 		
 		return (
 			<div className="calculator group">
-				<div className="column">
-					<Heading text="Herblore Inventory" subheading="How many herbs do you have?" />
-					<InventoryInputForm items={herbs} inventory={this.props.inventory} />
+				<div className="controls group">
+					<div className="column">
+						<Heading text="Herblore Inventory" subheading="How many herbs do you have?" />
+						<InventoryInputForm items={herbs} inventory={this.props.inventory} />
+					</div>
+					<div className="column">
+						<Heading text="Item Inventory" subheading="How many items do you have?" />
+						<InventoryInputForm items={secondaries} inventory={this.props.inventory} />
+					</div>
+					<div className="column">
+						<Heading text="Potion Output" subheading="Potions to consume all herbs" />
+						<PotionTotal />
+					</div>
+					<div className="column">
+						<Heading text="Items Needed" subheading="Items required to make potions" />
+						<RequirementTotal />
+					</div>
 				</div>
-				<div className="column">
-					<Heading text="Item Inventory" subheading="How many items do you have?" />
-					<InventoryInputForm items={secondaries} inventory={this.props.inventory} />
-				</div>
-				<div className="column">
-					<Heading text="Potion Output" subheading="Potions to consume all herbs" />
-					<PotionTotal />
-				</div>
-				<div className="column">
-					<Heading text="Items Needed" subheading="Items required to make potions" />
-					<RequirementTotal />
+				<div className="navigation">
+					NAVIGATION
 				</div>
 			</div>
 		);

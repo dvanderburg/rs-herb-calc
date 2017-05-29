@@ -1,12 +1,12 @@
 .heading {
-	text-align: center;
+	margin-bottom: 6px;
 }
 
 .heading h1 {
 	font-weight: bold;
 	font-size: 1.25em;
 	margin: 6px 0px;
-	padding: 2px 6px;
+	padding: 2px 0px;
 	color: #000;
 }
 

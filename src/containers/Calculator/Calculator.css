@@ -1,10 +1,55 @@
-.calculator .column {
-	float: left;
-	width: 25%;
+.calculator {
+	min-width: 320px;
+	overflow: hidden;
 }
 
+/* Small screen that cannot accomodate navigation or multiple columns */
+@media only screen and (max-width: 599px) {
 
-/* BREAK POINT - Wide screen that can accomodate all four columns */
+	.calculator .controls .column {
+		width: 320px;
+		margin: 0 auto;
+	}
+	.calculator .controls .column .heading {
+		text-align: center;
+	}
+	.calculator .controls .column .inventory-input-form {
+		width: 258px;
+		margin: 6px 12px 0px 50px;
+	}
+
+}
+
+/* Medium screen that can accomodate left-side navigation */
+@media only screen and (min-width: 600px) and (max-width: 999px) {
+	
+	.calculator .navigation {
+		display: block;
+		float: left;
+		width: 30%;
+	}
+	
+	.calculator .controls {
+		float: right;
+		width: 70%;
+	}
+	
+}
+
+/* Wide screen that can accomodate all four columns */
 @media only screen and (min-width: 1000px) {
+
+	.calculator {
+		padding: 6px 2%;
+	}
+	
+	.calculator .navigation {
+		display: none;
+	}
+
+	.calculator .controls .column {
+		float: left;
+		width: 24%;
+	}
 	
 }
