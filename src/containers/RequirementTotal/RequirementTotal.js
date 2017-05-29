@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 import ITEMS from '../../redux/data/items';
 
-import ItemQuantity from '../../components/ItemQuantity/ItemQuantity';
+import ItemQuantityWithSource from '../../components/ItemQuantityWithSource/ItemQuantityWithSource';
 
 const mapStateToProps = (state) => {
 
@@ -15,15 +15,13 @@ const mapStateToProps = (state) => {
 }
 
 const RequirementTotal = (props) => {
-
-	const itemQuantities = _.pairs(props.requirements).map(requirement => {
-
-		const itemID = requirement[0];
-		const itemQuantity = requirement[1];
+	
+	// create an ItemQuantity component for each item being output
+	const itemQuantities = _.map(props.requirements, (output, itemID) => {
+		
 		const item = ITEMS.find(item => item.id === itemID);
-
-		return <ItemQuantity key={itemID} item={item} quantity={itemQuantity} />
-
+		return <ItemQuantityWithSource key={itemID} item={item} quantity={output.quantity} sources={output.sources} />;
+		
 	});
 
 	return (

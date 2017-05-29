@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import { addItemResult } from './calculator';
 
 import {
 	AVANTOE,
@@ -42,61 +42,6 @@ import {
 	// WHITE_BERRIES,
 	// WINE_OF_ZAMORAK
 } from '../../data/items';
-
-/**
- * Helper function to format output
- * Takes the provided output object and returns a new copy with the given item, quantity, and source added/updated
- * If the provided quantity is zero it is filtered out and not added to the output
- * 
- * For example: If the existing output looks something like:
- * 		{
- * 			SUPER_ATTACK: {
- * 				quantity: 10,
- * 				sources: [
- * 					{ quantity: 10, source: "Needed to make Extreme Attack Potion" }
- * 				]
- * 			}
- * 		}
- * 
- * This function could be used as: outputPush(output, SUPER_ATTACK, 100, "Use remaining Irit")
- * This would result in the super attack quantity being incremented to a total of 110 and an additional source added
- * 
- * @param  {object} output  	An output object to return an updated copy of
- * @param  {string} itemID  	Unique item identifier (OVERLOAD, EXTREME_ATTACK, etc.)
- * @param  {integer} quantity 	The quantity of item being output
- * @param  {string} source  	The source of the output ("Needed to make Extreme Attack Potion", etc.)
- * 
- * @return {object}          An updated copy of output
- */
-const outputPush = (output, itemID, quantity, source) => {
-	
-	// there's no need to append additional output if no items are being output
-	if (quantity <= 0) {
-		return output;
-	}
-	
-	let prevOutputQuantity = 0;
-	let prevOutputSources = 0;
-	
-	// if this item exists in the output, save its existing quantity of sources
-	if (!_.isUndefined(output[itemID])) {		
-		prevOutputQuantity = output[itemID].quantity || 0;
-		prevOutputSources = output[itemID].sources || [];
-	}
-		
-	// return an updated copy of the output with quantity incremented and the new output source added
-	return {
-		...output,
-		[itemID]: {
-			quantity: prevOutputQuantity + quantity,
-			sources: [
-				...prevOutputSources,
-				{ source: source, quantity: quantity }
-			]
-		}
-	}
-
-}
 
 /**
  * Calculates the quantity of overloads to output
@@ -183,19 +128,19 @@ export const getOverloadOutputMatrix = (inventory) => {
 	const numSuperRangingForOverload = getNumSuperRangingForOverload(numExtremeRangingForOverload, inventory);
 	
 	// in order to output the desired number of overloads, some extreme and super potions may need to be made
-	// 	build the formatted output object using outputPush to ensure correct format while fitlering out any zero quantities
+	// 	build the formatted output object using addItemResult to ensure correct format while fitlering out any zero quantities
 	let output = {};
-	output = outputPush(output, OVERLOAD, numOverload, "Consume Torstol.");
-	output = outputPush(output, EXTREME_ATTACK, numExtremeAttackForOverload, "Create number of desired overloads.");
-	output = outputPush(output, EXTREME_STRENGTH, numExtremeStrengthForOverload, "Create number of desired overloads.");
-	output = outputPush(output, EXTREME_DEFENCE, numExtremeDefenceForOverload, "Create number of desired overloads.");
-	output = outputPush(output, EXTREME_MAGIC, numExtremeMagicForOverload, "Create number of desired overloads.");
-	output = outputPush(output, EXTREME_RANGING, numExtremeRangingForOverload, "Create number of desired overloads.");
-	output = outputPush(output, SUPER_ATTACK, numSuperAttackForOverload, "Create Extreme Attack for the number of desired overloads.");
-	output = outputPush(output, SUPER_STRENGTH, numSuperStrengthForOverload, "Create Extreme Strength for the number of desired overloads.");
-	output = outputPush(output, SUPER_DEFENCE, numSuperDefenceForOverload, "Create Extreme Defence for the number of desired overloads.");
-	output = outputPush(output, SUPER_MAGIC, numSuperMagicForOverload, "Create Extreme Magic for the number of desired overloads.");
-	output = outputPush(output, SUPER_RANGING_POTION, numSuperRangingForOverload, "Create Extreme Ranging Potion for the number of desired overloads.");
+	output = addItemResult(output, OVERLOAD, numOverload, "Consume Torstol.");
+	output = addItemResult(output, EXTREME_ATTACK, numExtremeAttackForOverload, "Create number of desired overloads.");
+	output = addItemResult(output, EXTREME_STRENGTH, numExtremeStrengthForOverload, "Create number of desired overloads.");
+	output = addItemResult(output, EXTREME_DEFENCE, numExtremeDefenceForOverload, "Create number of desired overloads.");
+	output = addItemResult(output, EXTREME_MAGIC, numExtremeMagicForOverload, "Create number of desired overloads.");
+	output = addItemResult(output, EXTREME_RANGING, numExtremeRangingForOverload, "Create number of desired overloads.");
+	output = addItemResult(output, SUPER_ATTACK, numSuperAttackForOverload, "Create Extreme Attack for the number of desired overloads.");
+	output = addItemResult(output, SUPER_STRENGTH, numSuperStrengthForOverload, "Create Extreme Strength for the number of desired overloads.");
+	output = addItemResult(output, SUPER_DEFENCE, numSuperDefenceForOverload, "Create Extreme Defence for the number of desired overloads.");
+	output = addItemResult(output, SUPER_MAGIC, numSuperMagicForOverload, "Create Extreme Magic for the number of desired overloads.");
+	output = addItemResult(output, SUPER_RANGING_POTION, numSuperRangingForOverload, "Create Extreme Ranging Potion for the number of desired overloads.");
 	
 	// the output returned here is formatted correctly and any zero quantity items have been filtered out
 	return output;
@@ -273,61 +218,27 @@ export const getOutput = (inventory) => {
 	const numAdditionalSuperDefenceForExtremeDefence = Math.max(0, numExtremeDefenceFromRemainingLantadyme - numSuperDefenceAfterOverloads - numSuperDefenceFromRemainingCadantime);
 	
 	let output = overloadMatrix;
-	output = outputPush(output, EXTREME_ATTACK, numExtremeAttackFromRemainingAvantoe, "Use remaining Avantoe.");
-	output = outputPush(output, EXTREME_STRENGTH, numExtremeStrengthFromRemainingDwarfWeed, "Use remaining Dwarf Weed.");
-	output = outputPush(output, EXTREME_DEFENCE, numExtremeDefenceFromRemainingLantadyme, "Use remaining Lantadyme.");
-	output = outputPush(output, EXTREME_MAGIC, numSuperMagicFromRemainingLantadyme, "Upgrade extra Super Magic into Extreme Magic.");
-	output = outputPush(output, EXTREME_RANGING, numSuperRangingFromRemainingDwarfWeed, "Upgrade extra Super Ranging into Extreme Ranging");
+	output = addItemResult(output, EXTREME_ATTACK, numExtremeAttackFromRemainingAvantoe, "Use remaining Avantoe.");
+	output = addItemResult(output, EXTREME_STRENGTH, numExtremeStrengthFromRemainingDwarfWeed, "Use remaining Dwarf Weed.");
+	output = addItemResult(output, EXTREME_DEFENCE, numExtremeDefenceFromRemainingLantadyme, "Use remaining Lantadyme.");
+	output = addItemResult(output, EXTREME_MAGIC, numSuperMagicFromRemainingLantadyme, "Upgrade extra Super Magic into Extreme Magic.");
+	output = addItemResult(output, EXTREME_RANGING, numSuperRangingFromRemainingDwarfWeed, "Upgrade extra Super Ranging into Extreme Ranging");
 	
-	output = outputPush(output, SUPER_ATTACK, numAdditionalSuperAttackForExtremeAttack, "Needed to create required Extreme Attack.");
-	output = outputPush(output, SUPER_ATTACK, numSuperAttackFromRemainingIrit, "Use up remaining Irit.");
-	output = outputPush(output, SUPER_STRENGTH, numAdditionalSuperStrengthForExtremeStrength, "Needed to create required Extreme Strength.");
-	output = outputPush(output, SUPER_STRENGTH, numSuperStrengthFromRemainingKwuarm, "Use up remaining Kwuarm.");
-	output = outputPush(output, SUPER_DEFENCE, numAdditionalSuperDefenceForExtremeDefence, "Needed to create required Extreme Defence.");
-	output = outputPush(output, SUPER_DEFENCE, numSuperDefenceFromRemainingCadantime, "Use up remaining Cadantime.");
-	output = outputPush(output, SUPER_MAGIC, numSuperMagicFromRemainingLantadyme, "Use up remaining Lantadyme.");
-	output = outputPush(output, SUPER_RANGING_POTION, numSuperRangingFromRemainingDwarfWeed, "Use up remaining Dwarf Weed.");
+	output = addItemResult(output, SUPER_ATTACK, numAdditionalSuperAttackForExtremeAttack, "Needed to create required Extreme Attack.");
+	output = addItemResult(output, SUPER_ATTACK, numSuperAttackFromRemainingIrit, "Use up remaining Irit.");
+	output = addItemResult(output, SUPER_STRENGTH, numAdditionalSuperStrengthForExtremeStrength, "Needed to create required Extreme Strength.");
+	output = addItemResult(output, SUPER_STRENGTH, numSuperStrengthFromRemainingKwuarm, "Use up remaining Kwuarm.");
+	output = addItemResult(output, SUPER_DEFENCE, numAdditionalSuperDefenceForExtremeDefence, "Needed to create required Extreme Defence.");
+	output = addItemResult(output, SUPER_DEFENCE, numSuperDefenceFromRemainingCadantime, "Use up remaining Cadantime.");
+	output = addItemResult(output, SUPER_MAGIC, numSuperMagicFromRemainingLantadyme, "Use up remaining Lantadyme.");
+	output = addItemResult(output, SUPER_RANGING_POTION, numSuperRangingFromRemainingDwarfWeed, "Use up remaining Dwarf Weed.");
 	
-	output = outputPush(output, PRAYER_POTION, getInventoryQuantity(RANARR), "Use up all Ranarr.");
-	output = outputPush(output, SARADOMIN_BREW, getInventoryQuantity(TOADFLAX), "Use up all Toadflax.");
-	output = outputPush(output, SUMMONING_POTION, getInventoryQuantity(SPIRIT_WEED), "Use up all Spirit Weed.");
-	output = outputPush(output, SUPER_RESTORE, getInventoryQuantity(SNAPDRAGON), "Use up all Snapdragon.");
-	output = outputPush(output, PRAYER_RENEWAL, getInventoryQuantity(FELLSTALK), "Use up all Fellstalk.");
+	output = addItemResult(output, PRAYER_POTION, getInventoryQuantity(RANARR), "Use up all Ranarr.");
+	output = addItemResult(output, SARADOMIN_BREW, getInventoryQuantity(TOADFLAX), "Use up all Toadflax.");
+	output = addItemResult(output, SUMMONING_POTION, getInventoryQuantity(SPIRIT_WEED), "Use up all Spirit Weed.");
+	output = addItemResult(output, SUPER_RESTORE, getInventoryQuantity(SNAPDRAGON), "Use up all Snapdragon.");
+	output = addItemResult(output, PRAYER_RENEWAL, getInventoryQuantity(FELLSTALK), "Use up all Fellstalk.");
 	
 	return output;
-	
-	// const oldOutput = {
-		
-	// 	[OVERLOAD]: getOverloadMatrixQuantity(OVERLOAD),
-		
-	// 	[EXTREME_ATTACK]: getOverloadMatrixQuantity(EXTREME_ATTACK) + numExtremeAttackFromRemainingAvantoe,
-	// 	[EXTREME_STRENGTH]: getOverloadMatrixQuantity(EXTREME_STRENGTH) + numExtremeStrengthFromRemainingDwarfWeed,
-	// 	[EXTREME_DEFENCE]: getOverloadMatrixQuantity(EXTREME_DEFENCE) + numExtremeDefenceFromRemainingLantadyme,
-	// 	[EXTREME_MAGIC]: getOverloadMatrixQuantity(EXTREME_MAGIC) + numSuperMagicFromRemainingLantadyme,	// upgrade any extra super magic made into extreme magic
-	// 	[EXTREME_RANGING]: getOverloadMatrixQuantity(EXTREME_RANGING) + numSuperRangingFromRemainingDwarfWeed,	// upgrade any extra super ranging made into extreme ranging
-		
-	// 	[SUPER_ATTACK]: getOverloadMatrixQuantity(SUPER_ATTACK) + numSuperAttackFromRemainingIrit + numAdditionalSuperAttackForExtremeAttack,
-	// 	[SUPER_STRENGTH]: getOverloadMatrixQuantity(SUPER_STRENGTH) + numSuperStrengthFromRemainingKwuarm + numAdditionalSuperStrengthForExtremeStrength,
-	// 	[SUPER_DEFENCE]: getOverloadMatrixQuantity(SUPER_DEFENCE) + numSuperDefenceFromRemainingCadantime + numAdditionalSuperDefenceForExtremeDefence,
-	// 	[SUPER_MAGIC]: getOverloadMatrixQuantity(SUPER_MAGIC) + numSuperMagicFromRemainingLantadyme,
-	// 	[SUPER_RANGING_POTION]: getOverloadMatrixQuantity(SUPER_RANGING_POTION) + numSuperRangingFromRemainingDwarfWeed,
-
-	// 	[PRAYER_POTION]: getInventoryQuantity(RANARR),
-	// 	[SARADOMIN_BREW]: getInventoryQuantity(TOADFLAX),
-	// 	[SUMMONING_POTION]: getInventoryQuantity(SPIRIT_WEED),
-	// 	[SUPER_RESTORE]: getInventoryQuantity(SNAPDRAGON),
-	// 	[PRAYER_RENEWAL]: getInventoryQuantity(FELLSTALK),
-				
-	// }
-
-	// // filter out any less than or equal to zero quantities
-	// let filteredOutput = {};
-	// for (let key in oldOutput) {
-	// 	if (oldOutput[key] > 0) {
-	// 		filteredOutput[key] = oldOutput[key];
-	// 	}
-	// }
-	
-	// return filteredOutput;
 
 }

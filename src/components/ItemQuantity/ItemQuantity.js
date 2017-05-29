@@ -1,17 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './ItemQuantity.css';
 
-export default (props) => {
+/**
+ * Generic component to display a quantity of a specific item with a name and thumbnail image
+ */
+class ItemQuantity extends React.Component {
 	
-	// import the item image
-	const image = require('../../assets/'+props.item.image);
+	render() {
 	
-	return (
-		<div className="item-quantity">
-			<img src={image} alt={props.item.name} />
-			{props.item.name} x{props.quantity}
-		</div>
-	);
+		// import the item image
+		const image = require('../../assets/'+this.props.item.image);
+		
+		return (
+			<div className="item-quantity">
+				<img src={image} alt={this.props.item.name} />
+				{this.props.item.name} x{this.props.quantity}
+			</div>
+		);
+		
+	}
 	
 }
+
+ItemQuantity.propTypes = {
+	item: PropTypes.shape({
+		id: PropTypes.string,
+		name: PropTypes.string,
+		image: PropTypes.string,
+	}),
+	quantity: PropTypes.number
+}
+
+export default ItemQuantity;

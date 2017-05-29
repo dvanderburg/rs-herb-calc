@@ -1,3 +1,5 @@
+import { addItemResult } from './calculator';
+
 import {
 	AVANTOE,
 	CADANTINE,
@@ -55,10 +57,26 @@ export const getRequirements = (inventory, output) => {
 	const getOutputQuantity = (itemID) => output[itemID] ? output[itemID].quantity : 0;
 
 	const requiredTorstol = Math.max(0, getOutputQuantity(OVERLOAD) - getInventoryQuantity(TORSTOL));
+	
+	const requiredAvantoe = Math.max(0, getOutputQuantity(EXTREME_ATTACK) - getInventoryQuantity(AVANTOE));	
+	
+	// deteremining where the dwarf weed is consumed is more complex since it is used in two potions
+	// 	the total number of dwarf weed required is simple: it's the quantity of extreme strength and super ranging being made, minus how much dwarf weed is owned
+	const inventoryDwarfWeed = getInventoryQuantity(DWARF_WEED);
+	const extremeStrengthOutput = getOutputQuantity(EXTREME_STRENGTH);
+	const superRangingOutput = getOutputQuantity(SUPER_RANGING_POTION);	
+	const requiredDwarfWeed = Math.max(0, extremeStrengthOutput + superRangingOutput - inventoryDwarfWeed);
+	const requiredDwarfWeedForExtremeStrength = Math.min(requiredDwarfWeed, extremeStrengthOutput, extremeStrengthOutput - Math.ceil(inventoryDwarfWeed / 2));
+	const requiredDwarfWeedForSuperRanging = Math.min(requiredDwarfWeed, superRangingOutput, superRangingOutput - Math.floor(inventoryDwarfWeed / 2));
+	
+	// similar to dwarf weed, determing where lantadyme is consumed is more complex since it is used in two potions
+	const inventoryLantadyme = getInventoryQuantity(LANTADYME);
+	const extremeDefenceOutput = getOutputQuantity(EXTREME_DEFENCE);
+	const superMagicOutput = getOutputQuantity(SUPER_MAGIC);
+	const requiredLantadyme = Math.max(0, extremeDefenceOutput + superMagicOutput - inventoryLantadyme);
+	const requiredLantadymeForExtremeDefence = Math.min(requiredLantadyme, extremeDefenceOutput, extremeDefenceOutput - Math.ceil(inventoryLantadyme / 2));
+	const requiredLantadymeForSuperMagic = Math.min(requiredLantadyme, superMagicOutput, superMagicOutput - Math.floor(inventoryLantadyme / 2));
 
-	const requiredAvantoe = Math.max(0, getOutputQuantity(EXTREME_ATTACK) - getInventoryQuantity(AVANTOE));
-	const requiredDwarfWeed = Math.max(0, getOutputQuantity(EXTREME_STRENGTH) + getOutputQuantity(SUPER_RANGING_POTION) - getInventoryQuantity(DWARF_WEED));
-	const requiredLantadyme = Math.max(0, getOutputQuantity(EXTREME_DEFENCE) + getOutputQuantity(SUPER_MAGIC) - getInventoryQuantity(LANTADYME));
 	const requiredIrit = Math.max(0, getOutputQuantity(SUPER_ATTACK) - getInventoryQuantity(IRIT));
 	const requiredKwuarm = Math.max(0, getOutputQuantity(SUPER_STRENGTH) - getInventoryQuantity(KWUARM));
 	const requiredCadantine = Math.max(0, getOutputQuantity(SUPER_DEFENCE) - getInventoryQuantity(CADANTINE));
@@ -81,45 +99,36 @@ export const getRequirements = (inventory, output) => {
 	const requiredRedSpiderEggs = Math.max(0, getOutputQuantity(SUPER_RESTORE) - getInventoryQuantity(RED_SPIDER_EGGS));
 	const requiredMorchellaMushroom = Math.max(0, getOutputQuantity(PRAYER_RENEWAL) - getInventoryQuantity(MORCHELLA_MUSHROOM));
 	
-	const requirements = {
-		
-		[TORSTOL]: requiredTorstol,
-
-		[AVANTOE]: requiredAvantoe,
-		[DWARF_WEED]: requiredDwarfWeed,
-		[LANTADYME]: requiredLantadyme,
-		[IRIT]: requiredIrit,
-		[KWUARM]: requiredKwuarm,
-		[CADANTINE]: requiredCadantine,
-		[RANARR]: requiredRanarr,
-		[TOADFLAX]: requiredToadflax,
-		[SPIRIT_WEED]: requiredSpritWeed,
-		[SNAPDRAGON]: requiredSnapdragon,
-		[FELLSTALK]: requiredFellstalk,
-
-		[GROUND_MUD_RUNES]: requiredGroundMudRunes,
-		[GRENWALL_SPIKES]: requiredGrenwallSpikes,
-		[EYE_OF_NEWT]: requiredEyeOfNewt,
-		[LIMPWURT_ROOT]: requiredLimpwurtRoot,
-		[WHITE_BERRIES]: requiredWhiteBerries,
-		[POTATO_CACTUS]: requiredPotatoCactus,
-		[WINE_OF_ZAMORAK]: requiredWineOfZamorak,
-		[SNAPE_GRASS]: requiredSnapeGrass,
-		[CRUSHED_NEST]: requiredCrushedNest,
-		[SUMMONING_EGG]: requiredSummoningEgg,
-		[RED_SPIDER_EGGS]: requiredRedSpiderEggs,
-		[MORCHELLA_MUSHROOM]: requiredMorchellaMushroom,
-		
-	}
+	let requirements = {};
+	requirements = addItemResult(requirements, TORSTOL, requiredTorstol, "Create Overloads.");
 	
-	// filter out any zero quantities
-	let filteredRequirements = {};
-	for (let key in requirements) {
-		if (requirements[key] > 0) {
-			filteredRequirements[key] = requirements[key];
-		}
-	}
+	requirements = addItemResult(requirements, AVANTOE, requiredAvantoe, "Create Extreme Attack.");
+	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForExtremeStrength, "Create Extreme Strength.");
+	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForSuperRanging, "Create Super Ranging Potion.");
+	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForExtremeDefence, "Create Extreme Defence.");
+	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForSuperMagic, "Create Super Magic.");
+	requirements = addItemResult(requirements, IRIT, requiredIrit, "Create Super Attack.");
+	requirements = addItemResult(requirements, KWUARM, requiredKwuarm, "Create Super Strength.");
+	requirements = addItemResult(requirements, CADANTINE, requiredCadantine, "Create Super Defence.");
+	requirements = addItemResult(requirements, RANARR, requiredRanarr, "Create Prayer Potion");
+	requirements = addItemResult(requirements, FELLSTALK, requiredFellstalk, "Create Prayer Renewal.");
+	requirements = addItemResult(requirements, TOADFLAX, requiredToadflax, "Create Saradomin Brew.");
+	requirements = addItemResult(requirements, SNAPDRAGON, requiredSnapdragon, "Create Super Restore.");
+	requirements = addItemResult(requirements, SPIRIT_WEED, requiredSpritWeed, "Create Summoning Potion.");
 	
-	return filteredRequirements;
+	requirements = addItemResult(requirements, GROUND_MUD_RUNES, requiredGroundMudRunes, "Create Extreme Magic.");
+	requirements = addItemResult(requirements, GRENWALL_SPIKES, requiredGrenwallSpikes, "Create Extreme Ranging.");
+	requirements = addItemResult(requirements, EYE_OF_NEWT, requiredEyeOfNewt, "Create Super Attack.");
+	requirements = addItemResult(requirements, LIMPWURT_ROOT, requiredLimpwurtRoot, "Create Super Strength.");
+	requirements = addItemResult(requirements, WHITE_BERRIES, requiredWhiteBerries, "Create Super Defence.");
+	requirements = addItemResult(requirements, POTATO_CACTUS, requiredPotatoCactus, "Create Super Magic.");
+	requirements = addItemResult(requirements, WINE_OF_ZAMORAK, requiredWineOfZamorak, "Create Super Ranging Potion.");
+	requirements = addItemResult(requirements, SNAPE_GRASS, requiredSnapeGrass, "Create Prayer Potion.");
+	requirements = addItemResult(requirements, CRUSHED_NEST, requiredCrushedNest, "Create Saradomin Brew.");
+	requirements = addItemResult(requirements, SUMMONING_EGG, requiredSummoningEgg, "Create Summoning Potion.");
+	requirements = addItemResult(requirements, RED_SPIDER_EGGS, requiredRedSpiderEggs, "Create Super Restores.");
+	requirements = addItemResult(requirements, MORCHELLA_MUSHROOM, requiredMorchellaMushroom, "Create Prayer Renewal.");
+	
+	return requirements;
 	
 }
