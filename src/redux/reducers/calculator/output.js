@@ -108,7 +108,7 @@ const getNumSuperRangingForOverload = (numExtremeRangingForOverload, inventory) 
  * @param  {object} inventory The inventory object, keyed with item id, value is quantity of item owned
  * @return {object}           The output of potions, keyed with item id, value is the quantity of potion to create
  */
-export const getOverloadOutputMatrix = (inventory) => {
+const getOverloadOutputMatrix = (inventory) => {
 	
 	// number of torstol owned determines how many overloads are to be made
 	const numOverload = getOverloadOutput(inventory);

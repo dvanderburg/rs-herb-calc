@@ -8,6 +8,19 @@ import ItemQuantity from '../ItemQuantity/ItemQuantity';
  */
 class OutputItem extends React.Component {
 	
+	static propTypes = {
+		item: PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+			image: PropTypes.string,
+		}),
+		quantity: PropTypes.number,
+		sources: PropTypes.arrayOf(PropTypes.shape({
+			quantity: PropTypes.number,
+			source: PropTypes.string
+		}))
+	};
+	
 	render() {
 		
 		const sources = this.props.sources.map((source, index) => {
@@ -23,19 +36,6 @@ class OutputItem extends React.Component {
 		
 	}
 	
-}
-
-OutputItem.propTypes = {
-	item: PropTypes.shape({
-		id: PropTypes.string,
-		name: PropTypes.string,
-		image: PropTypes.string,
-	}),
-	quantity: PropTypes.number,
-	sources: PropTypes.arrayOf(PropTypes.shape({
-		quantity: PropTypes.number,
-		source: PropTypes.string
-	}))
 }
 
 export default OutputItem;

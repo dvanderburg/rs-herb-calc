@@ -10,12 +10,21 @@
 		width: 320px;
 		margin: 0 auto;
 	}
+	.calculator .controls .column.inactive {
+		display: none;
+	}
+	
 	.calculator .controls .column .heading {
 		text-align: center;
 	}
+	
 	.calculator .controls .column .inventory-input-form {
 		width: 258px;
 		margin: 6px 12px 0px 50px;
+	}
+	
+	.calculator .navigation {
+		display: none;
 	}
 
 }
@@ -32,6 +41,17 @@
 	.calculator .controls {
 		float: right;
 		width: 70%;
+	}
+	.calculator .controls .column.inactive {
+		display: none;
+	}
+	
+	.calculator .navigation {
+		display: block;
+	}
+	
+	.calculator .button {
+		display: none;
 	}
 	
 }
@@ -50,6 +70,10 @@
 	.calculator .controls .column {
 		float: left;
 		width: 24%;
+	}
+	
+	.calculator .navigation, .calculator .button {
+		display: none;
 	}
 	
 }

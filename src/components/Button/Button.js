@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { Link } from 'react-router-dom';
 
 import './Button.css';
 
@@ -12,30 +15,35 @@ import './Button.css';
 		onClick		function	Function to execute when the button is clicked
 	
 */
-export default class extends React.Component {
+class Button extends React.Component {
 	
-	/**
-	*/
 	static defaultProps = {
-		
 		style: {},
 		className: "",
 		text: "Button",
 		onClick: () => {}
+	};
 	
-	}
+	static propTypes = {
+		style: PropTypes.object,
+		className: PropTypes.string,
+		to: PropTypes.string,
+		text: PropTypes.string
+	};
 	
 	/**
 	*/
 	render() {
 		
 		// ensure the component always has the classname "button" in addition to any provided as props
-		const className = "button "+this.props.className;
+		const className = cx("button ", this.props.className);
 		
 		return (
-			<a className={className} style={this.props.style} href={this.props.href} onClick={this.props.onClick}>{this.props.text}</a>
+			<Link className={className} style={this.props.style} to={this.props.to} onClick={this.props.onClick}>{this.props.text}</Link>
 		);
 
 	}
 	
 }
+
+export default Button;

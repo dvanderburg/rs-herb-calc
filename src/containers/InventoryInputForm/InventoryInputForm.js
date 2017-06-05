@@ -14,6 +14,16 @@ import './InventoryInputForm.css';
 */
 class InventoryInputForm extends React.Component {
 	
+	static propTypes = {
+		items: PropTypes.arrayOf(PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+			types: PropTypes.arrayOf(PropTypes.string),
+			image: PropTypes.string,
+		})),
+		inventory: PropTypes.objectOf(PropTypes.number),
+	};
+	
 	render() {
 		
 		// create an item quantity input for each item passed to the component
@@ -35,16 +45,6 @@ class InventoryInputForm extends React.Component {
 		
 	}
 	
-}
-
-InventoryInputForm.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.shape({
-		id: PropTypes.string,
-		name: PropTypes.string,
-		types: PropTypes.arrayOf(PropTypes.string),
-		image: PropTypes.string,
-	})),
-	inventory: PropTypes.objectOf(PropTypes.number),
 }
 
 function mapDispatchToProps(dispatch) {

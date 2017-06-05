@@ -8,6 +8,15 @@ import './ItemQuantity.css';
  */
 class ItemQuantity extends React.Component {
 	
+	static propTypes = {
+		item: PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+			image: PropTypes.string,
+		}),
+		quantity: PropTypes.number
+	};
+	
 	render() {
 	
 		// import the item image
@@ -22,15 +31,6 @@ class ItemQuantity extends React.Component {
 		
 	}
 	
-}
-
-ItemQuantity.propTypes = {
-	item: PropTypes.shape({
-		id: PropTypes.string,
-		name: PropTypes.string,
-		image: PropTypes.string,
-	}),
-	quantity: PropTypes.number
 }
 
 export default ItemQuantity;

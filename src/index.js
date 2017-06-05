@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import rootReducer from './redux/reducers/root';
 
@@ -28,7 +29,15 @@ store.subscribe(() => {
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Calculator />
+		<BrowserRouter>
+			<Switch>
+				<Route path="/herbs" render={() => <Calculator section={Calculator.SECTION_HERBS} />} />
+				<Route path="/secondaries" render={() => <Calculator section={Calculator.SECTION_SECONDARIES} />} />
+				<Route path="/output" render={() => <Calculator section={Calculator.SECTION_OUTPUT} />} />
+				<Route path="/requirements" render={() => <Calculator section={Calculator.SECTION_REQUIREMENTS} />} />
+				<Route path="/" component={Calculator} />
+			</Switch>
+		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root')
 );

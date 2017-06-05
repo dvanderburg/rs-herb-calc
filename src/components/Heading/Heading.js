@@ -5,6 +5,10 @@ import './Heading.css';
 
 class Heading extends React.Component {
 	
+	static propTypes = {
+		text: PropTypes.string
+	};
+	
 	/**
 	 * @return {JSX}
 	 */
@@ -19,10 +23,6 @@ class Heading extends React.Component {
 		
 	}
 
-}
-
-Heading.propTypes = {
-	text: PropTypes.string
 }
 
 export default Heading;
