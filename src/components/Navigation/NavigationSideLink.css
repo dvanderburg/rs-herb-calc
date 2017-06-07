@@ -1,0 +1,7 @@
+.navigation-side-link {
+	display: block;
+	padding: 10px 15px;
+}
+.navigation-side-link.active {
+	color: #333;
+}

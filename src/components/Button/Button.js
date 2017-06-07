@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Button.css';
 
@@ -39,7 +39,7 @@ class Button extends React.Component {
 		const className = cx("button ", this.props.className);
 		
 		return (
-			<Link className={className} style={this.props.style} to={this.props.to} onClick={this.props.onClick}>{this.props.text}</Link>
+			<NavLink className={className} style={this.props.style} to={this.props.to} onClick={this.props.onClick}>{this.props.text}</NavLink>
 		);
 
 	}

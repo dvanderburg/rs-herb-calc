@@ -23,7 +23,7 @@
 		margin: 6px 12px 0px 50px;
 	}
 	
-	.calculator .navigation {
+	.calculator .navigation-side-bar {
 		display: none;
 	}
 
@@ -32,7 +32,7 @@
 /* Medium screen that can accomodate left-side navigation */
 @media only screen and (min-width: 600px) and (max-width: 999px) {
 	
-	.calculator .navigation {
+	.calculator .navigation-side-bar {
 		display: block;
 		float: left;
 		width: 30%;
@@ -46,8 +46,10 @@
 		display: none;
 	}
 	
-	.calculator .navigation {
+	.calculator .navigation-side-bar {
 		display: block;
+		position: fixed;
+		top: 0px;
 	}
 	
 	.calculator .button {
@@ -63,7 +65,7 @@
 		padding: 6px 2%;
 	}
 	
-	.calculator .navigation {
+	.calculator .navigation-side-bar {
 		display: none;
 	}
 
@@ -72,7 +74,7 @@
 		width: 24%;
 	}
 	
-	.calculator .navigation, .calculator .button {
+	.calculator .navigation-side-bar, .calculator .button {
 		display: none;
 	}
 	

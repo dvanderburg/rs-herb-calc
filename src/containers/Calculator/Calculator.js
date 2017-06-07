@@ -6,8 +6,8 @@ import cx from 'classnames';
 import ITEMS from '../../redux/data/items';
 import { ITEM_TYPES } from '../../redux/data/items';
 
-import Button from '../../components/Button/Button';
-import Navigation from '../../components/Navigation/Navigation';
+import NavigationSideBar from '../../components/Navigation/NavigationSideBar';
+import NavigationFooter from '../../components/Navigation/NavigationFooter';
 import Heading from '../../components/Heading/Heading';
 import InventoryInputForm from '../InventoryInputForm/InventoryInputForm';
 import PotionTotal from '../PotionTotal/PotionTotal';
@@ -42,6 +42,23 @@ class Calculator extends React.Component {
 	};
 	
 	/**
+	 * When the calculator is updated ensure the window scrolls to the top
+	 * On narrow devices the navigation is towards the bottom of the screen
+	 * @param  {object} prevProps The previous props, see React component docs
+	 */
+	componentDidUpdate(prevProps) {
+		
+		// only need to scroll to a new window if the calculator is being updated by navigating to a route
+		if (this.props.location !== prevProps.location) {
+			console.log("Scroll to top of calculator content");
+			window.scrollTo(0, 0);
+		} else {
+			console.log("No need for scrolling.");
+		}
+		
+	}
+	
+	/**
 	 * Creates the classname to apply to the element containing a specific section
 	 * For example: The "herbs" section may have the class names: column, herbs, visible
 	 * Either "visible" or "hidden" will be added depending on the current value of props.activeSection
@@ -71,27 +88,25 @@ class Calculator extends React.Component {
 					<div className={this.getSectionClassName(Calculator.SECTION_HERBS)}>
 						<Heading text="Herblore Inventory" subheading="How many herbs do you have?" />
 						<InventoryInputForm items={herbs} inventory={this.props.inventory} />
-						<Button text="Next" to="/secondaries" />
+						<NavigationFooter next="/secondaries" />
 					</div>
 					<div className={this.getSectionClassName(Calculator.SECTION_SECONDARIES)}>
 						<Heading text="Item Inventory" subheading="How many items do you have?" />
 						<InventoryInputForm items={secondaries} inventory={this.props.inventory} />
-						<Button text="Back" to="/herbs" />
-						<Button text="Next" to="/output" />
+						<NavigationFooter back="/herbs" next="/output" />
 					</div>
 					<div className={this.getSectionClassName(Calculator.SECTION_OUTPUT)}>
 						<Heading text="Potion Output" subheading="Potions to consume all herbs" />
 						<PotionTotal />
-						<Button text="Back" to="/secondaries" />
-						<Button text="Next" to="/requirements" />
+						<NavigationFooter back="/secondaries" next="/requirements" />
 					</div>
 					<div className={this.getSectionClassName(Calculator.SECTION_REQUIREMENTS)}>
 						<Heading text="Items Needed" subheading="Items required to make potions" />
 						<RequirementTotal />
-						<Button text="Back" to="/secondaries" />
+						<NavigationFooter back="/secondaries" />
 					</div>
 				</div>
-				<Navigation />
+				<NavigationSideBar />
 			</div>
 		);
 

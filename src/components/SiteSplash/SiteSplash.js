@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../Button/Button';
 
 import './SiteSplash.css';
-import splashIcon from './assets/herb_splash.png';
+import splashIcon from '../../assets/herb_splash.png';
 
 export default (props) => {
 	

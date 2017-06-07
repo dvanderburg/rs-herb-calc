@@ -31,10 +31,10 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<Switch>
-				<Route path="/herbs" render={() => <Calculator section={Calculator.SECTION_HERBS} />} />
-				<Route path="/secondaries" render={() => <Calculator section={Calculator.SECTION_SECONDARIES} />} />
-				<Route path="/output" render={() => <Calculator section={Calculator.SECTION_OUTPUT} />} />
-				<Route path="/requirements" render={() => <Calculator section={Calculator.SECTION_REQUIREMENTS} />} />
+				<Route path="/herbs" render={(props) => <Calculator section={Calculator.SECTION_HERBS} {...props} />} />
+				<Route path="/secondaries" render={(props) => <Calculator section={Calculator.SECTION_SECONDARIES} {...props} />} />
+				<Route path="/output" render={(props) => <Calculator section={Calculator.SECTION_OUTPUT} {...props} />} />
+				<Route path="/requirements" render={(props) => <Calculator section={Calculator.SECTION_REQUIREMENTS} {...props} />} />
 				<Route path="/" component={Calculator} />
 			</Switch>
 		</BrowserRouter>
