@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import ItemQuantity from '../ItemQuantity/ItemQuantity';
 
+import './ItemQuantityWithSource.css';
+
 /**
  * Component to display a specific output item
  */
@@ -24,13 +26,15 @@ class OutputItem extends React.Component {
 	render() {
 		
 		const sources = this.props.sources.map((source, index) => {
-			return <div key={index}>{source.quantity} {source.source}</div>
+			return <div key={index} className="source">{source.quantity} {source.source}</div>
 		});
 		
 		return (
-			<div className="item-output" style={{marginBottom: "10px"}}>
+			<div className="item-quantity-with-source">
 				<ItemQuantity item={this.props.item} quantity={this.props.quantity} />
-				{sources}
+				<div className="sources">
+					{sources}
+				</div>
 			</div>
 		);
 		

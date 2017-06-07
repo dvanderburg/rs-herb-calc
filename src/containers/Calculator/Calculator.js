@@ -105,7 +105,7 @@ class Calculator extends React.Component {
 					<div className={this.getSectionClassName(Calculator.SECTION_REQUIREMENTS)}>
 						<Heading text="Items Needed" subheading="Items required to make potions" />
 						<RequirementTotal />
-						<NavigationFooter back="/secondaries" />
+						<NavigationFooter back="/output" />
 					</div>
 				</div>
 				<NavigationSideBar />

@@ -23,9 +23,10 @@ class ItemQuantity extends React.Component {
 		const image = require('../../assets/'+this.props.item.image);
 		
 		return (
-			<div className="item-quantity">
+			<div className="item-quantity group">
 				<img src={image} alt={this.props.item.name} />
-				{this.props.item.name} x{this.props.quantity}
+				<div className="quantity">{this.props.quantity}</div>
+				<div className="name">{this.props.item.name}</div>
 			</div>
 		);
 		

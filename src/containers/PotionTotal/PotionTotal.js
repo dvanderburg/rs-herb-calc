@@ -31,7 +31,7 @@ const PotionTotal = (props) => {
 	});
 	
 	return (
-		<div className="potion-total-component">
+		<div className="potion-total">
 			{itemQuantities}
 		</div>
 	);
