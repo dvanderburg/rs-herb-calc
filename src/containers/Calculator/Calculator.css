@@ -3,12 +3,32 @@
 	overflow: hidden;
 }
 
+.calculator .navigation-header {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+}
+
+.calculator .controls .column {
+	margin: 0 auto;
+	padding-bottom: 24px;
+}
+
+.calculator .controls .column .navigation-footer {
+	padding: 12px 0px;
+}
+
 /* Small screen that cannot accomodate navigation or multiple columns */
 @media only screen and (max-width: 599px) {
 
+	.calculator .controls {
+		padding-top: 50px;
+	}
 	.calculator .controls .column {
-		width: 320px;
 		margin: 0 auto;
+		padding-left: 12px;
+		padding-right: 12px;
 	}
 	.calculator .controls .column.inactive {
 		display: none;
@@ -19,8 +39,8 @@
 	}
 	
 	.calculator .controls .column .inventory-input-form {
-		width: 258px;
-		margin: 6px 12px 0px 50px;
+		width: 255px;
+		margin-left: 41px;
 	}
 	
 	.calculator .navigation-side-bar {
@@ -38,6 +58,10 @@
 		width: 30%;
 	}
 	
+	.calculator .navigation-header {
+		display: none;
+	}
+	
 	.calculator .controls {
 		float: right;
 		width: 70%;
@@ -46,14 +70,14 @@
 		display: none;
 	}
 	
+	.calculator .controls .column .navigation-footer {
+		text-align: left;
+	}
+	
 	.calculator .navigation-side-bar {
 		display: block;
 		position: fixed;
 		top: 0px;
-	}
-	
-	.calculator .button {
-		display: none;
 	}
 	
 }
@@ -65,6 +89,10 @@
 		padding: 6px 2%;
 	}
 	
+	.calculator .controls {
+		padding-top: 42px;
+	}
+	
 	.calculator .navigation-side-bar {
 		display: none;
 	}
@@ -74,7 +102,7 @@
 		width: 24%;
 	}
 	
-	.calculator .navigation-side-bar, .calculator .button {
+	.calculator .navigation-side-bar, .calculator .navigation-footer {
 		display: none;
 	}
 	

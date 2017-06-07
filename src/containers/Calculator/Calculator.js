@@ -6,10 +6,11 @@ import cx from 'classnames';
 import ITEMS from '../../redux/data/items';
 import { ITEM_TYPES } from '../../redux/data/items';
 
-import NavigationSideBar from '../../components/Navigation/NavigationSideBar';
-import NavigationFooter from '../../components/Navigation/NavigationFooter';
 import Heading from '../../components/Heading/Heading';
 import InventoryInputForm from '../InventoryInputForm/InventoryInputForm';
+import NavigationFooter from '../../components/Navigation/NavigationFooter';
+import NavigationHeader from '../../components/Navigation/NavigationHeader';
+import NavigationSideBar from '../../components/Navigation/NavigationSideBar';
 import PotionTotal from '../PotionTotal/PotionTotal';
 import RequirementTotal from '../RequirementTotal/RequirementTotal';
 
@@ -84,6 +85,7 @@ class Calculator extends React.Component {
 		
 		return (
 			<div className="calculator group">
+				<NavigationHeader />
 				<div className="controls group">
 					<div className={this.getSectionClassName(Calculator.SECTION_HERBS)}>
 						<Heading text="Herblore Inventory" subheading="How many herbs do you have?" />
