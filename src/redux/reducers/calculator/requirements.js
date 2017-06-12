@@ -100,34 +100,34 @@ export const getRequirements = (inventory, output) => {
 	const requiredMorchellaMushroom = Math.max(0, getOutputQuantity(PRAYER_RENEWAL) - getInventoryQuantity(MORCHELLA_MUSHROOM));
 	
 	let requirements = {};
-	requirements = addItemResult(requirements, TORSTOL, requiredTorstol, "Create Overloads.");
+	requirements = addItemResult(requirements, TORSTOL, requiredTorstol, "Create Overloads");
 	
-	requirements = addItemResult(requirements, AVANTOE, requiredAvantoe, "Create Extreme Attack.");
-	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForExtremeStrength, "Create Extreme Strength.");
-	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForSuperRanging, "Create Super Ranging Potion.");
-	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForExtremeDefence, "Create Extreme Defence.");
-	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForSuperMagic, "Create Super Magic.");
-	requirements = addItemResult(requirements, IRIT, requiredIrit, "Create Super Attack.");
-	requirements = addItemResult(requirements, KWUARM, requiredKwuarm, "Create Super Strength.");
-	requirements = addItemResult(requirements, CADANTINE, requiredCadantine, "Create Super Defence.");
+	requirements = addItemResult(requirements, AVANTOE, requiredAvantoe, "Create Extreme Attack");
+	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForExtremeStrength, "Create Extreme Strength");
+	requirements = addItemResult(requirements, DWARF_WEED, requiredDwarfWeedForSuperRanging, "Create Super Ranging Potion");
+	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForExtremeDefence, "Create Extreme Defence");
+	requirements = addItemResult(requirements, LANTADYME, requiredLantadymeForSuperMagic, "Create Super Magic");
+	requirements = addItemResult(requirements, IRIT, requiredIrit, "Create Super Attack");
+	requirements = addItemResult(requirements, KWUARM, requiredKwuarm, "Create Super Strength");
+	requirements = addItemResult(requirements, CADANTINE, requiredCadantine, "Create Super Defence");
 	requirements = addItemResult(requirements, RANARR, requiredRanarr, "Create Prayer Potion");
-	requirements = addItemResult(requirements, FELLSTALK, requiredFellstalk, "Create Prayer Renewal.");
-	requirements = addItemResult(requirements, TOADFLAX, requiredToadflax, "Create Saradomin Brew.");
-	requirements = addItemResult(requirements, SNAPDRAGON, requiredSnapdragon, "Create Super Restore.");
-	requirements = addItemResult(requirements, SPIRIT_WEED, requiredSpritWeed, "Create Summoning Potion.");
+	requirements = addItemResult(requirements, FELLSTALK, requiredFellstalk, "Create Prayer Renewal");
+	requirements = addItemResult(requirements, TOADFLAX, requiredToadflax, "Create Saradomin Brew");
+	requirements = addItemResult(requirements, SNAPDRAGON, requiredSnapdragon, "Create Super Restore");
+	requirements = addItemResult(requirements, SPIRIT_WEED, requiredSpritWeed, "Create Summoning Potion");
 	
-	requirements = addItemResult(requirements, GROUND_MUD_RUNES, requiredGroundMudRunes, "Create Extreme Magic.");
-	requirements = addItemResult(requirements, GRENWALL_SPIKES, requiredGrenwallSpikes, "Create Extreme Ranging.");
-	requirements = addItemResult(requirements, EYE_OF_NEWT, requiredEyeOfNewt, "Create Super Attack.");
-	requirements = addItemResult(requirements, LIMPWURT_ROOT, requiredLimpwurtRoot, "Create Super Strength.");
-	requirements = addItemResult(requirements, WHITE_BERRIES, requiredWhiteBerries, "Create Super Defence.");
-	requirements = addItemResult(requirements, POTATO_CACTUS, requiredPotatoCactus, "Create Super Magic.");
-	requirements = addItemResult(requirements, WINE_OF_ZAMORAK, requiredWineOfZamorak, "Create Super Ranging Potion.");
-	requirements = addItemResult(requirements, SNAPE_GRASS, requiredSnapeGrass, "Create Prayer Potion.");
-	requirements = addItemResult(requirements, CRUSHED_NEST, requiredCrushedNest, "Create Saradomin Brew.");
-	requirements = addItemResult(requirements, SUMMONING_EGG, requiredSummoningEgg, "Create Summoning Potion.");
-	requirements = addItemResult(requirements, RED_SPIDER_EGGS, requiredRedSpiderEggs, "Create Super Restores.");
-	requirements = addItemResult(requirements, MORCHELLA_MUSHROOM, requiredMorchellaMushroom, "Create Prayer Renewal.");
+	requirements = addItemResult(requirements, GROUND_MUD_RUNES, requiredGroundMudRunes, "Create Extreme Magic");
+	requirements = addItemResult(requirements, GRENWALL_SPIKES, requiredGrenwallSpikes, "Create Extreme Ranging");
+	requirements = addItemResult(requirements, EYE_OF_NEWT, requiredEyeOfNewt, "Create Super Attack");
+	requirements = addItemResult(requirements, LIMPWURT_ROOT, requiredLimpwurtRoot, "Create Super Strength");
+	requirements = addItemResult(requirements, WHITE_BERRIES, requiredWhiteBerries, "Create Super Defence");
+	requirements = addItemResult(requirements, POTATO_CACTUS, requiredPotatoCactus, "Create Super Magic");
+	requirements = addItemResult(requirements, WINE_OF_ZAMORAK, requiredWineOfZamorak, "Create Super Ranging Potion");
+	requirements = addItemResult(requirements, SNAPE_GRASS, requiredSnapeGrass, "Create Prayer Potion");
+	requirements = addItemResult(requirements, CRUSHED_NEST, requiredCrushedNest, "Create Saradomin Brew");
+	requirements = addItemResult(requirements, SUMMONING_EGG, requiredSummoningEgg, "Create Summoning Potion");
+	requirements = addItemResult(requirements, RED_SPIDER_EGGS, requiredRedSpiderEggs, "Create Super Restores");
+	requirements = addItemResult(requirements, MORCHELLA_MUSHROOM, requiredMorchellaMushroom, "Create Prayer Renewal");
 	
 	return requirements;
 	

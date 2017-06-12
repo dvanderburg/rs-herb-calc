@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ItemQuantity from '../ItemQuantity/ItemQuantity';
+import ItemSource from '../ItemSource/ItemSource';
 
+import '../ItemQuantity/ItemQuantity.css';
 import './ItemQuantityWithSource.css';
 
 /**
@@ -25,16 +26,21 @@ class OutputItem extends React.Component {
 	
 	render() {
 		
+		// import the item image
+		const image = require('../../assets/'+this.props.item.image);
+		
 		const sources = this.props.sources.map((source, index) => {
-			return <div key={index} className="source">{source.quantity} {source.source}</div>
+			return <ItemSource key={index} quantity={source.quantity} source={source.source} />
 		});
 		
+		// <ItemQuantity item={this.props.item} quantity={this.props.quantity} />
+		
 		return (
-			<div className="item-quantity-with-source">
-				<ItemQuantity item={this.props.item} quantity={this.props.quantity} />
-				<div className="sources">
-					{sources}
-				</div>
+			<div className="item-quantity group">
+				<img src={image} alt={this.props.item.name} />
+				<div className="quantity">{this.props.quantity}</div>
+				<div className="name">{this.props.item.name}</div>
+				<div className="sources">{sources}</div>
 			</div>
 		);
 		
