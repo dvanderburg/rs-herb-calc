@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import ItemSource from '../ItemSource/ItemSource';
 
-import '../ItemQuantity/ItemQuantity.css';
 import './ItemQuantityWithSource.css';
 
 /**
