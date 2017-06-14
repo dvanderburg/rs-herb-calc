@@ -11,15 +11,3 @@
 	background: transparent url('../../assets/herb_splash.png') no-repeat 2px center;
 	background-size: 32px;
 }
-
-/* Small screen that cannot accomodate navigation or multiple columns */
-@media only screen and (max-width: 599px) {
-}
-
-/* Medium screen that can accomodate left-side navigation */
-@media only screen and (min-width: 600px) and (max-width: 999px) {
-}
-
-/* Wide screen that can accomodate all four columns */
-@media only screen and (min-width: 1000px) {	
-}

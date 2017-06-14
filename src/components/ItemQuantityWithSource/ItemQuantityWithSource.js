@@ -37,9 +37,13 @@ class OutputItem extends React.Component {
 		return (
 			<div className="item-quantity group">
 				<img src={image} alt={this.props.item.name} />
-				<div className="quantity">{this.props.quantity}</div>
-				<div className="name">{this.props.item.name}</div>
-				<div className="sources">{sources}</div>
+				<div className="details group">
+					<div className="details-heading">
+						<span className="quantity">{this.props.quantity}</span>
+						<span className="name">{this.props.item.name}</span>
+					</div>
+					<div className="sources">{sources}</div>
+				</div>
 			</div>
 		);
 		

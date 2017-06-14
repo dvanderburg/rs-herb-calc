@@ -54,7 +54,7 @@
 }
 
 /* Medium screen that can accomodate left-side navigation */
-@media only screen and (min-width: 600px) and (max-width: 999px) {
+@media only screen and (min-width: 600px) and (max-width: 1099px) {
 	
 	.calculator .navigation-side-bar {
 		display: block;
@@ -87,7 +87,7 @@
 }
 
 /* Wide screen that can accomodate all four columns */
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1100px) {
 
 	.calculator {
 		padding: 6px 2%;

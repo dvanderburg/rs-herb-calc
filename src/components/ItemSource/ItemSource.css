@@ -1,3 +1,9 @@
-.item-source .source {
-	font-style: italic;
+.item-source {
+	color: #333;
+	font-size: 0.85em;
+	padding: 3px 0px;
+}
+.item-source .source-quantity {
+	color: #555;
+	font-size: 0.9em;
 }

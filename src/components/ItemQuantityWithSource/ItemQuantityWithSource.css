@@ -3,47 +3,35 @@
 }
 
 .item-quantity img {
-	width: 60px;
-	height: 50px;
+	width: 50px;
+	height: 60px;
 	margin: 0px 10px 2px 0px;
 	float: left;
 }
 
-.item-quantity .quantity {
-	color: #111;
-	text-shadow: 1px 1px 2px #bbb;
-	font-size: 1.45em;
-	font-weight: bold;
-	padding-bottom: 1px;
+.item-quantity .details {
+	margin-left: 60px;
 }
 
-.item-quantity .name {
-	font-size: 1.15em;
-	padding: 2px 0px;
+.item-quantity .details-heading {
+	padding-bottom: 2px;
+}
+
+.item-quantity .details .quantity {
+	color: #111;
+	text-shadow: 1px 1px 2px #bbb;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding-right: 5px;
+}
+
+.item-quantity .details .name {
+	font-size: 1.2em;
 }
 
 
 .item-quantity .sources {
-	/*display: none;*/
-	background-color: #fff;
-	padding: 6px 8px;
+	float: left;
+	padding: 2px 6px;
 	border-radius: 4px;
-}
-
-/* Small screen that cannot accomodate navigation or multiple columns */
-@media only screen and (max-width: 599px) {
-}
-
-/* Medium screen that can accomodate left-side navigation */
-@media only screen and (min-width: 600px) and (max-width: 999px) {
-	
-	.item-quantity-with-source .sources {
-		display: block;
-		float: right;
-	}
-	
-}
-
-/* Wide screen that can accomodate all four columns */
-@media only screen and (min-width: 1000px) {
 }

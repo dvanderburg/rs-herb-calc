@@ -8,7 +8,7 @@ export default class ItemSource extends React.Component {
 		
 		return (
 			<div className="item-source">
-				{this.props.quantity} required: <span className="source">{this.props.source}</span>
+				{this.props.source} <span className="source-quantity">({this.props.quantity})</span>
 			</div>
 		);
 		
