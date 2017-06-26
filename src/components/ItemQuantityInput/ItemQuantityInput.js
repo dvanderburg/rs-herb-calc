@@ -48,7 +48,7 @@ export default class extends React.Component {
 		
 		// the quantity entered to be validated
 		let quantity = e.target.value;
-		
+				
 		// ensure the quantity is numeric, otherwise revert to default of zero
 		if (_.isNaN(quantity) || quantity === "") {
 			quantity = this._value;
@@ -94,7 +94,7 @@ export default class extends React.Component {
 				<div className="item-details">
 					<div className="item-name">{this.props.item.name}</div>
 					<div className="quantity-input">
-						<input type="text" defaultValue={this.props.quantity} onFocus={this.onInputFocus} onBlur={this.onInputBlur} />
+						<input type="text" key={this.props.quantity} defaultValue={this.props.quantity} onFocus={this.onInputFocus} onBlur={this.onInputBlur} />
 					</div>
 				</div>
 			</div>

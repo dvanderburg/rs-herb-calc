@@ -4,11 +4,24 @@
 	/*color: #ffd633;*/
 	color: #fff;
 	text-shadow: 1px 2px 2px #111;
-	padding: 13px 10px 10px 38px;
-	background: #eee url('../../assets/herb_splash.png') no-repeat 2px center;
+	padding: 2px 10px 2px 39px;
+	background: #eee url('../../assets/herb_splash.png') no-repeat 3px center;
 	background-size: 32px;
 	border-bottom: 1px solid #ddd;
 	box-shadow: 1px 1px 1px #bbb;
+}
+
+.navigation-header .navigation-title {
+	float: left;
+	padding: 11px 0px 10px 0px;
+}
+
+.navigation-header .navigation-controls {
+	float: right;
+	height: 40px;
+}
+.navigation-header .navigation-controls .navigation-icon-button {
+	float: right;
 }
 
 /* Small screen that cannot accomodate navigation or multiple columns */
@@ -20,5 +33,10 @@
 }
 
 /* Wide screen that can accomodate all four columns */
-@media only screen and (min-width: 1100px) {	
+@media only screen and (min-width: 1100px) {
+	
+	.navigation-header .menu-button {
+		display: none;
+	}
+
 }

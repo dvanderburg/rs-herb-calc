@@ -5,9 +5,13 @@ body {
 	color: #222;
 }
 
-a, a:visited, a:hover, a:active {
+a, a:visited, a:active {
 	color: rgb(0, 0, 210);
 	text-decoration: none;
+}
+a:hover {
+  color: #ffad33;
+  text-decoration: none;
 }
 
 input[type="text"] {

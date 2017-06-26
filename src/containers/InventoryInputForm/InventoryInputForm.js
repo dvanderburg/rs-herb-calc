@@ -47,6 +47,14 @@ class InventoryInputForm extends React.Component {
 	
 }
 
+function mapStateToProps(state, ownProps) {
+
+	return {
+		inventory: state.calculator.inventory
+	}
+	
+}
+
 function mapDispatchToProps(dispatch) {
 
 	return {
@@ -55,4 +63,4 @@ function mapDispatchToProps(dispatch) {
 
 }
 
-export default connect(Object, mapDispatchToProps)(InventoryInputForm);
+export default connect(mapStateToProps, mapDispatchToProps)(InventoryInputForm);

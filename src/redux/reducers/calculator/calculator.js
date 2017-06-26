@@ -1,6 +1,9 @@
 import _ from 'underscore';
 
-import { INVENTORY_ITEM_QUANTITY_CHANGE } from '../../actions/types';
+import {
+	CLEAR_ALL,
+	INVENTORY_ITEM_QUANTITY_CHANGE
+} from '../../actions/types';
 
 import { getOutput } from './output';
 import { getRequirements } from './requirements';
@@ -100,6 +103,8 @@ const calculatorReducer = (calculator=calculatorInitialState, action) => {
 	switch (action.type) {
 		case INVENTORY_ITEM_QUANTITY_CHANGE:
 			return inventoryItemQuantityChange(calculator, action.item, action.quantity);
+		case CLEAR_ALL:
+			return calculatorInitialState;
 		default:
 			return calculator;
 	}

@@ -1,0 +1,14 @@
+.navigation-icon-button {
+	width: 34px;
+	height: 34px;
+	padding: 3px;
+	cursor: pointer;
+}
+
+.navigation-icon-button svg {
+	fill: #505050;
+}
+
+.navigation-icon-button svg:hover {
+	fill: #ffad33;
+}

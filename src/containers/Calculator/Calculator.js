@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -9,7 +8,7 @@ import { ITEM_TYPES } from '../../redux/data/items';
 import Heading from '../../components/Heading/Heading';
 import InventoryInputForm from '../InventoryInputForm/InventoryInputForm';
 import NavigationFooter from '../../components/Navigation/NavigationFooter';
-import NavigationHeader from '../../components/Navigation/NavigationHeader';
+import NavigationHeader from '../NavigationHeader/NavigationHeader';
 import NavigationSideBar from '../../components/Navigation/NavigationSideBar';
 import PotionTotal from '../PotionTotal/PotionTotal';
 import RequirementTotal from '../RequirementTotal/RequirementTotal';
@@ -89,12 +88,12 @@ class Calculator extends React.Component {
 				<div className="controls group">
 					<div className={this.getSectionClassName(Calculator.SECTION_HERBS)}>
 						<Heading text="Herblore Inventory" subheading="How many herbs do you have?" />
-						<InventoryInputForm items={herbs} inventory={this.props.inventory} />
+						<InventoryInputForm items={herbs} />
 						<NavigationFooter next="/secondaries" />
 					</div>
 					<div className={this.getSectionClassName(Calculator.SECTION_SECONDARIES)}>
 						<Heading text="Item Inventory" subheading="How many items do you have?" />
-						<InventoryInputForm items={secondaries} inventory={this.props.inventory} />
+						<InventoryInputForm items={secondaries} />
 						<NavigationFooter back="/herbs" next="/output" />
 					</div>
 					<div className={this.getSectionClassName(Calculator.SECTION_OUTPUT)}>
@@ -116,12 +115,4 @@ class Calculator extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
-	
-	return {
-		inventory: state.calculator.inventory
-	}
-	
-}
-
-export default connect(mapStateToProps)(Calculator);
+export default Calculator;
