@@ -50,10 +50,7 @@ class Calculator extends React.Component {
 		
 		// only need to scroll to a new window if the calculator is being updated by navigating to a route
 		if (this.props.location !== prevProps.location) {
-			console.log("Scroll to top of calculator content");
 			window.scrollTo(0, 0);
-		} else {
-			console.log("No need for scrolling.");
 		}
 		
 	}
