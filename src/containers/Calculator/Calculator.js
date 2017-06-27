@@ -8,7 +8,7 @@ import { ITEM_TYPES } from '../../redux/data/items';
 import Heading from '../../components/Heading/Heading';
 import InventoryInputForm from '../InventoryInputForm/InventoryInputForm';
 import NavigationFooter from '../../components/Navigation/NavigationFooter';
-import NavigationHeader from '../NavigationHeader/NavigationHeader';
+import NavigationHeader from '../Navigation/NavigationHeader';
 import NavigationSideBar from '../../components/Navigation/NavigationSideBar';
 import PotionTotal from '../PotionTotal/PotionTotal';
 import RequirementTotal from '../RequirementTotal/RequirementTotal';
