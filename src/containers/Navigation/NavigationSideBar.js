@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavigationSideLink from './NavigationSideLink';
+import NavigationSideLink from '../../components/Navigation/NavigationSideLink';
 
 import './NavigationSideBar.css';
 
