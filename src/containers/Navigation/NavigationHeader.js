@@ -26,13 +26,13 @@ class NavigationHeader extends React.Component {
 	
 }
 
-const mapStateToProps = (state, ownProps) => {
+function mapStateToProps(state, ownProps) {
 
 	return {};
 
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
 	
 	return {
 		onClearClick: () => dispatch(clearAll())
