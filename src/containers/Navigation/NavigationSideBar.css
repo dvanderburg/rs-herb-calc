@@ -1,6 +1,7 @@
 .navigation-side-bar {
 	height: 100vh;
 }
+
 .navigation-side-bar .side-bar-header {
 	font-size: 1.1em;
 	font-weight: bold;
@@ -10,4 +11,8 @@
 	padding: 13px 10px 10px 38px;
 	background: transparent url('../../assets/herb_splash.png') no-repeat 2px center;
 	background-size: 32px;
+}
+
+.navigation-side-bar .navigation-side-buttons {
+	padding: 10px 15px;
 }
