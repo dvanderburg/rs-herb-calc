@@ -211,11 +211,11 @@ export const getOutput = (inventory) => {
 	// if there are not enough super strength to cover the additional extreme strength, add more super strength to the output
 	const numAdditionalSuperStrengthForExtremeStrength = Math.max(0, numExtremeStrengthFromRemainingDwarfWeed - numSuperStrengthAfterOverloads - numSuperStrengthFromRemainingKwuarm);
 
-	// turn all remaining cadantime into super defence
-	const numSuperDefenceFromRemainingCadantime = numCadantineAfterOverloads;
+	// turn all remaining cadantine into super defence
+	const numSuperDefenceFromRemainingCadantine = numCadantineAfterOverloads;
 
 	// if there are not enough super defence to cover the additional extreme defence, add more super defence to the ouput
-	const numAdditionalSuperDefenceForExtremeDefence = Math.max(0, numExtremeDefenceFromRemainingLantadyme - numSuperDefenceAfterOverloads - numSuperDefenceFromRemainingCadantime);
+	const numAdditionalSuperDefenceForExtremeDefence = Math.max(0, numExtremeDefenceFromRemainingLantadyme - numSuperDefenceAfterOverloads - numSuperDefenceFromRemainingCadantine);
 	
 	let output = overloadMatrix;
 	output = addItemResult(output, EXTREME_ATTACK, numExtremeAttackFromRemainingAvantoe, "Avantoe");
@@ -229,7 +229,7 @@ export const getOutput = (inventory) => {
 	output = addItemResult(output, SUPER_STRENGTH, numAdditionalSuperStrengthForExtremeStrength, "Extreme Strength");
 	output = addItemResult(output, SUPER_STRENGTH, numSuperStrengthFromRemainingKwuarm, "Kwuarm");
 	output = addItemResult(output, SUPER_DEFENCE, numAdditionalSuperDefenceForExtremeDefence, "Extreme Defence");
-	output = addItemResult(output, SUPER_DEFENCE, numSuperDefenceFromRemainingCadantime, "Cadantime");
+	output = addItemResult(output, SUPER_DEFENCE, numSuperDefenceFromRemainingCadantine, "Cadantine");
 	output = addItemResult(output, SUPER_MAGIC, numSuperMagicFromRemainingLantadyme, "Lantadyme");
 	output = addItemResult(output, SUPER_RANGING_POTION, numSuperRangingFromRemainingDwarfWeed, "Dwarf Weed");
 	
