@@ -43,4 +43,5 @@ function mapDispatchToProps(dispatch) {
 	
 }
 
+// the connected component uses the pure:false option to re-render the component when navigation occurs
 export default connect(mapStateToProps, mapDispatchToProps, null, { pure: false })(NavigationSideBar);

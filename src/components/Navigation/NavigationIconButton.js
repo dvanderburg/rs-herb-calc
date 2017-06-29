@@ -6,7 +6,9 @@ import './NavigationIconButton.css';
 export default class NavigationIconButton extends React.Component {
 	
 	static propTypes = {
-		onClick: PropTypes.func
+		onClick: PropTypes.func,
+		title: PropTypes.string,
+		d: PropTypes.string
 	};
 	
 	render() {

@@ -1,0 +1,24 @@
+.empty-output {
+	padding: 6px 4px 8px 4px;
+}
+
+.empty-output svg {
+	float: left;
+	width: 45px;
+	height: 45px;
+	fill: #666;
+	padding: 2px 0px;
+}
+
+.empty-output .details {
+	margin-left: 45px;
+	padding: 0px 6px;
+}
+.empty-output .details .heading {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.empty-output .details .body {
+	font-style: italic;
+	color: #333;
+}
