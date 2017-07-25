@@ -39,13 +39,15 @@ import {
 	SUPER_MAGIC,
 	SUPER_RANGING_POTION,
 	SUPER_RESTORE,
+	SUPER_SARADOMIN_BREW,
 	WHITE_BERRIES,
-	WINE_OF_ZAMORAK
+	WINE_OF_ZAMORAK,
+	WINE_OF_SARADOMIN,
 } from '../../data/items';
 
 /**
  * Calculates the items required to generate the provided output given the provided inventory
- * For example: If a Prayer Potion is desired output and the inventory has a Ranaar but no Snape Grass, the grass is returned a a requirement to achieve desired output
+ * For example: If a Prayer Potion is desired output and the inventory has a Ranaar but no Snape Grass, the grass is returned aS a requirement to achieve desired output
  * @param  {object} inventory The user's inventory of items, keyed with item id, value of quantity
  * @param  {object} output    The desired potion output, keyed with item id, value of quantity 
  * @return {object}           The items required to generate the desired output, keyed with item id, value of quantity
@@ -92,7 +94,8 @@ export const getRequirements = (inventory, output) => {
 	const requiredLimpwurtRoot = Math.max(0, getOutputQuantity(SUPER_STRENGTH) - getInventoryQuantity(LIMPWURT_ROOT));
 	const requiredWhiteBerries = Math.max(0, getOutputQuantity(SUPER_DEFENCE) - getInventoryQuantity(WHITE_BERRIES));
 	const requiredPotatoCactus = Math.max(0, getOutputQuantity(SUPER_MAGIC) - getInventoryQuantity(POTATO_CACTUS));
-	const requiredWineOfZamorak = Math.max(0, getOutputQuantity(SUPER_RANGING_POTION) - getInventoryQuantity(WINE_OF_ZAMORAK));	
+	const requiredWineOfZamorak = Math.max(0, getOutputQuantity(SUPER_RANGING_POTION) - getInventoryQuantity(WINE_OF_ZAMORAK));
+	const requiredWineOfSaradomin = Math.max(0, getOutputQuantity(SUPER_SARADOMIN_BREW) - getInventoryQuantity(WINE_OF_SARADOMIN));
 	const requiredSnapeGrass = Math.max(0, getOutputQuantity(PRAYER_POTION) - getInventoryQuantity(SNAPE_GRASS));
 	const requiredCrushedNest = Math.max(0, getOutputQuantity(SARADOMIN_BREW) - getInventoryQuantity(CRUSHED_NEST))
 	const requiredSummoningEgg = Math.max(0, getOutputQuantity(SUMMONING_POTION) - getInventoryQuantity(SUMMONING_EGG));
@@ -122,7 +125,10 @@ export const getRequirements = (inventory, output) => {
 	requirements = addItemResult(requirements, LIMPWURT_ROOT, requiredLimpwurtRoot, "Super Strength");
 	requirements = addItemResult(requirements, WHITE_BERRIES, requiredWhiteBerries, "Super Defence");
 	requirements = addItemResult(requirements, POTATO_CACTUS, requiredPotatoCactus, "Super Magic");
+	
 	requirements = addItemResult(requirements, WINE_OF_ZAMORAK, requiredWineOfZamorak, "Super Ranging Potion");
+	requirements = addItemResult(requirements, WINE_OF_SARADOMIN, requiredWineOfSaradomin, "Super Saradomin Brew");
+	
 	requirements = addItemResult(requirements, SNAPE_GRASS, requiredSnapeGrass, "Prayer Potion");
 	requirements = addItemResult(requirements, CRUSHED_NEST, requiredCrushedNest, "Saradomin Brew");
 	requirements = addItemResult(requirements, SUMMONING_EGG, requiredSummoningEgg, "Summoning Potion");

@@ -39,6 +39,7 @@ import {
 	SUPER_MAGIC,
 	SUPER_RANGING_POTION,
 	SUPER_RESTORE,
+	SUPER_SARADOMIN_BREW,
 	// WHITE_BERRIES,
 	// WINE_OF_ZAMORAK
 } from '../../data/items';
@@ -148,6 +149,10 @@ const getOverloadOutputMatrix = (inventory) => {
 }
 
 /**
+ * Calculates the potion ouput based on the provided inventory
+ * The output prioritizes using up all Torstol to make overloads and creating and required super/extreme potions in the process
+ * After overloads, the output prioritizes maximizing XP to use up all herbs
+ * @param {object} inventory Object representing the user's inventory { ITEM: quantity, ITEM: quantity... }
 */
 export const getOutput = (inventory) => {
 
@@ -217,6 +222,9 @@ export const getOutput = (inventory) => {
 	// if there are not enough super defence to cover the additional extreme defence, add more super defence to the ouput
 	const numAdditionalSuperDefenceForExtremeDefence = Math.max(0, numExtremeDefenceFromRemainingLantadyme - numSuperDefenceAfterOverloads - numSuperDefenceFromRemainingCadantine);
 	
+	// quantity of super sara brew is based on the number of toadflax that will become regular sara brew plus any sara brew already in their inventory
+	const numSuperSaradominBrew = getInventoryQuantity(TOADFLAX) + getInventoryQuantity(SARADOMIN_BREW);
+	
 	let output = overloadMatrix;
 	output = addItemResult(output, EXTREME_ATTACK, numExtremeAttackFromRemainingAvantoe, "Avantoe");
 	output = addItemResult(output, EXTREME_STRENGTH, numExtremeStrengthFromRemainingDwarfWeed, "Dwarf Weed");
@@ -232,9 +240,11 @@ export const getOutput = (inventory) => {
 	output = addItemResult(output, SUPER_DEFENCE, numSuperDefenceFromRemainingCadantine, "Cadantine");
 	output = addItemResult(output, SUPER_MAGIC, numSuperMagicFromRemainingLantadyme, "Lantadyme");
 	output = addItemResult(output, SUPER_RANGING_POTION, numSuperRangingFromRemainingDwarfWeed, "Dwarf Weed");
+
+	output = addItemResult(output, SARADOMIN_BREW, getInventoryQuantity(TOADFLAX), "Toadflax");
+	output = addItemResult(output, SUPER_SARADOMIN_BREW, numSuperSaradominBrew, "Upgrade Saradomin Brew");
 	
 	output = addItemResult(output, PRAYER_POTION, getInventoryQuantity(RANARR), "Ranarr");
-	output = addItemResult(output, SARADOMIN_BREW, getInventoryQuantity(TOADFLAX), "Toadflax");
 	output = addItemResult(output, SUMMONING_POTION, getInventoryQuantity(SPIRIT_WEED), "Spirit Weed");
 	output = addItemResult(output, SUPER_RESTORE, getInventoryQuantity(SNAPDRAGON), "Snapdragon");
 	output = addItemResult(output, PRAYER_RENEWAL, getInventoryQuantity(FELLSTALK), "Fellstalk");

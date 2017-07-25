@@ -40,12 +40,14 @@ export const SNAPE_GRASS = "SNAPE_GRASS";
 export const SUMMONING_EGG = "SUMMONING_EGG";
 export const SUMMONING_POTION = "SUMMONING_POTION";
 export const SUPER_ATTACK = "SUPER_ATTACK";
+export const SUPER_SARADOMIN_BREW = "SUPER_SARADOMIN_BREW";
 export const SUPER_STRENGTH = "SUPER_STRENGTH";
 export const SUPER_DEFENCE = "SUPER_DEFENCE";
 export const SUPER_MAGIC = "SUPER_MAGIC";
 export const SUPER_RANGING_POTION = "SUPER_RANGING_POTION";
 export const SUPER_RESTORE = "SUPER_RESTORE";
 export const WHITE_BERRIES = "WHITE_BERRIES";
+export const WINE_OF_SARADOMIN = "WINE_OF_SARADOMIN";
 export const WINE_OF_ZAMORAK = "WINE_OF_ZAMORAK";
 
 // constants representing different types or categories of items
@@ -225,6 +227,12 @@ const ITEMS = [
 		image: "extreme_ranging.png"
 	},
 	{
+		id: SARADOMIN_BREW,
+		name: "Saradomin Brew",
+		types: [ ITEM_TYPES.POTION, ITEM_TYPES.SECONDARY ],
+		image: "saradomin_brew.png"
+	},
+	{
 		id: GROUND_MUD_RUNES,
 		name: "Ground Mud Runes",
 		types: [ ITEM_TYPES.SECONDARY ],
@@ -285,6 +293,12 @@ const ITEMS = [
 		image: "wine_of_zamorak.png"
 	},
 	{
+		id: WINE_OF_SARADOMIN,
+		name: "Wine of Saradomin",
+		types: [ ITEM_TYPES.SECONDARY ],
+		image: "wine_of_saradomin.png"
+	},
+	{
 		id: SNAPE_GRASS,
 		name: "Snape Grass",
 		types: [ ITEM_TYPES.SECONDARY ],
@@ -315,10 +329,10 @@ const ITEMS = [
 		image: "red_spiders_eggs.png"
 	},
 	{
-		id: SARADOMIN_BREW,
-		name: "Saradomin Brew",
+		id: SUPER_SARADOMIN_BREW,
+		name: "Super Saradomin Brew",
 		types: [ ITEM_TYPES.POTION ],
-		image: "saradomin_brew.png"
+		image: "super_saradomin_brew.png"
 	},
 	{
 		id: MORCHELLA_MUSHROOM,
