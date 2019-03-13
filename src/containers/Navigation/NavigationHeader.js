@@ -15,7 +15,7 @@ class NavigationHeader extends React.Component {
 		
 		return (
 			<div className="navigation-header group">
-				<div className="navigation-title">RS Herb Calc</div>
+				<div className="navigation-title">R<span className="header-title-suffix">une</span>S<span className="header-title-suffix">scape</span> Overload Calc<span className="header-title-suffix">ulator</span></div>
 				<div className="navigation-controls group">
 					<NavigationIconButton title="Clear" onClick={this.props.onClearClick} d="M6 32h20l2-22h-24zM20 4v-4h-8v4h-10v6l2-2h24l2 2v-6h-10zM18 4h-4v-2h4v2z" />
 				</div>
